@@ -1,0 +1,19 @@
+# Git will ignore...
+
+# IDE Files
+.vscode/
+
+# Local Environment Configuration
+.env
+
+# npm Files
+package-lock.json
+
+# Node Modules
+node_modules/
+
+# Build Outputs
+dist/
+*.log
+*.tgz
+*.tsbuildinfo
