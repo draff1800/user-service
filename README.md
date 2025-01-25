@@ -30,6 +30,6 @@ Integrates with other microservices for operations related to user permissions o
 A tool similar to Google Docs; Users are able to concurrently edit a shared document and see changes in real-time. Powered by a microservices-based back-end, it focuses on scalability and and efficient data synchronization.
 
 Check out the other microservices:
-[Document Service](https://github.com/draff1800/real-time-collaboration-tool-document-service)
-[Sync Service](https://github.com/draff1800/real-time-collaboration-tool-sync-service)
+* [Document Service](https://github.com/draff1800/real-time-collaboration-tool-document-service)
+* [Sync Service](https://github.com/draff1800/real-time-collaboration-tool-sync-service)
 
