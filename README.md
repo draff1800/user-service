@@ -5,7 +5,7 @@ One of three microservices powering the [Real-Time Collaboration Tool](#what-is-
 
 ### Description
 Manages user registration, authentication and profile management.
-Integrates with other microservices for operations related to user permissions or metadata.
+Integrates with other microservices for operations related to user data.
 
 ### Endpoints
 #### Authentication
