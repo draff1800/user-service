@@ -1,14 +1,15 @@
 import { CustomError } from '../custom-error.js';
 
 export class UnauthorizedError extends CustomError {
-  StatusCode = 404;
+  private static readonly statusPhrase = 'Unauthorized';
+  readonly StatusCode = 401;
 
-  constructor() {
-    super('Unauthorized');
+  constructor(message: string) {
+    super(message ? `${UnauthorizedError.statusPhrase}: ${message}` : `${UnauthorizedError.statusPhrase}`);
     Object.setPrototypeOf(this, UnauthorizedError.prototype);
   }
 
   override serialize(): { message: string } {
-    return { message: 'Unauthorized' };
+    return { message: this.message };
   }
 }

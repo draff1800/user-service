@@ -1,14 +1,15 @@
 import { CustomError } from '../custom-error.js';
 
 export class InternalServerError extends CustomError {
-  StatusCode = 500;
+  private static readonly statusPhrase = 'Internal Server Error';
+  readonly StatusCode = 500;
 
-  constructor() {
-    super('Internal Server Error');
+  constructor(message: string) {
+    super(message ? `${InternalServerError.statusPhrase}: ${message}` : `${InternalServerError.statusPhrase}`);
     Object.setPrototypeOf(this, InternalServerError.prototype);
   }
 
   override serialize(): { message: string } {
-    return { message: 'Internal Server Error' };
+    return { message: this.message };
   }
 }

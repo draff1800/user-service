@@ -1,4 +1,4 @@
 export abstract class CustomError extends Error {
-  abstract StatusCode: number;
+  abstract readonly StatusCode: number;
   abstract serialize(): { message: string };
 }

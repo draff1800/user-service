@@ -1,14 +1,15 @@
 import { CustomError } from '../custom-error.js';
 
 export class BadRequestError extends CustomError {
-  StatusCode = 403;
+  private static readonly statusPhrase = 'Bad Request';
+  readonly StatusCode = 403;
 
-  constructor() {
-    super('Bad Request');
+  constructor(message: string) {
+    super(message ? `${BadRequestError.statusPhrase}: ${message}` : `${BadRequestError.statusPhrase}`);
     Object.setPrototypeOf(this, BadRequestError.prototype);
   }
 
   override serialize(): { message: string } {
-    return { message: 'Bad Request' };
+    return { message: this.message };
   }
 }
