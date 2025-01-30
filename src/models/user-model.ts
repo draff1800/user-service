@@ -1,12 +1,18 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import { Model, Schema, model } from 'mongoose';
 
-interface UserDocument extends Document {
+interface UserDocument {
   username: string;
   email: string;
   passwordHash: string;
 }
 
-const UserSchema: Schema = new Schema(
+interface UserMethods {
+  serialize(): { username: string; email: string; createdDateTime: Date; updatedDateTime: Date };
+}
+
+type UserModel = Model<UserDocument, object, UserMethods>;
+
+const userSchema: Schema = new Schema<UserDocument, UserModel, UserMethods>(
   {
     username: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
@@ -16,7 +22,15 @@ const UserSchema: Schema = new Schema(
     timestamps: { createdAt: 'createdDateTime', updatedAt: 'updatedDateTime' },
   },
 );
+userSchema.method('serialize', function serialize() {
+  return {
+    username: this.username,
+    email: this.email,
+    createdDateTime: this.createdDateTime,
+    updatedDateTime: this.updatedDateTime,
+  };
+});
 
-const UserModel = mongoose.model<UserDocument>('User', UserSchema);
+const User = model<UserDocument, UserModel>('User', userSchema);
 
-export default UserModel;
+export default User;

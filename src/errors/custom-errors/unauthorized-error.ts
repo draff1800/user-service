@@ -4,7 +4,7 @@ export class UnauthorizedError extends CustomError {
   private static readonly statusPhrase = 'Unauthorized';
   readonly StatusCode = 401;
 
-  constructor(message: string) {
+  constructor(message?: string) {
     super(message ? `${UnauthorizedError.statusPhrase}: ${message}` : `${UnauthorizedError.statusPhrase}`);
     Object.setPrototypeOf(this, UnauthorizedError.prototype);
   }
