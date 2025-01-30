@@ -1,10 +1,8 @@
-import type { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import User from '../models/user-model.js';
 import { InternalServerError } from '../errors/custom-errors/internal-server-error.js';
 
-const register = async (req: Request, res: Response) => {
-  const { username, email, password } = req.body;
+const register = async (username: string, email: string, password: string) => {
   const passwordHash = await bcrypt.hash(password, 10);
 
   User.create({
@@ -13,7 +11,7 @@ const register = async (req: Request, res: Response) => {
     passwordHash,
   })
     .then((user) => {
-      res.status(201).json(user.serialize());
+      return user.serialize;
     })
     .catch((error) => {
       throw new InternalServerError(error);
