@@ -15,12 +15,16 @@
       "noUncheckedIndexedAccess": true,
       "noImplicitOverride": true,
 
-      /* Transpiling TypeScript to JavaScript */
+      /* Transpiling */
       "module": "NodeNext",
+      "rootDir": "./src",
       "outDir": "dist",
       "sourceMap": true,
-  
+
       // ECMAScript 2022 and APIs for type-checking
       "lib": ["es2022"]
-    }
+    },
+
+    // Only transpile ./src
+    "include": ["src/**/*"],
   }
