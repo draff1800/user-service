@@ -31,6 +31,4 @@ userSchema.method('serialize', function serialize() {
   };
 });
 
-const User = model<UserDocument, UserModel>('User', userSchema);
-
-export default User;
+export const User = model<UserDocument, UserModel>('User', userSchema);

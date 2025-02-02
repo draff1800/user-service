@@ -7,13 +7,13 @@ import {
   getUserDetails,
 } from '../controllers/user-controller.js';
 
-const router = Router();
+const userRouter = Router();
 
-router.use(authenticateUser);
+userRouter.use(authenticateUser);
 
-router.get('/me', getCurrentUserDetails);
-router.put('/me', updateCurrentUserDetails);
-router.delete('/me', deleteCurrentUser);
-router.get('/:id', getUserDetails);
+userRouter.get('/me', getCurrentUserDetails);
+userRouter.put('/me', updateCurrentUserDetails);
+userRouter.delete('/me', deleteCurrentUser);
+userRouter.get('/:id', getUserDetails);
 
-export default router;
+export { userRouter };

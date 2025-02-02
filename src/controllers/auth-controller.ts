@@ -1,11 +1,11 @@
 import bcrypt from 'bcrypt';
-import User from '../models/user-model.js';
+import { User } from '../models/user-model.js';
 import { InternalServerError } from '../errors/custom-errors/internal-server-error.js';
 
 const register = async (username: string, email: string, password: string) => {
   const passwordHash = await bcrypt.hash(password, 10);
 
-  User.create({
+  await User.create({
     username,
     email,
     passwordHash,
@@ -13,8 +13,8 @@ const register = async (username: string, email: string, password: string) => {
     .then((user) => {
       return user.serialize;
     })
-    .catch((error) => {
-      throw new InternalServerError(error);
+    .catch(() => {
+      throw new InternalServerError("Couldn't register user. Please try again later.");
     });
 };
 

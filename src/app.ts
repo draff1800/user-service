@@ -3,9 +3,9 @@ import helmet from 'helmet';
 import cors from 'cors';
 import morgan from 'morgan';
 import config from './config.js';
-import authRouter from './routers/auth-router.js';
-import userRouter from './routers/user-router.js';
-import errorHandler from './middleware/error-handler-middleware.js';
+import { authRouter } from './routers/auth-router.js';
+import { userRouter } from './routers/user-router.js';
+import { handleError } from './middleware/handle-error-middleware.js';
 
 const app = express();
 
@@ -21,6 +21,6 @@ if (config.nodeEnv === 'production') {
 app.use('/v1/auth', authRouter);
 app.use('/v1/users', userRouter);
 
-app.use(errorHandler);
+app.use(handleError);
 
 export default app;
