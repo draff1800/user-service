@@ -1,17 +1,23 @@
-const getCurrentUserDetails = () => {
-  console.log('Get Current User Details');
+import type { Request, Response, NextFunction } from 'express';
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const getCurrentUserDetails = (_req: Request, res: Response, _next: NextFunction) => {
+  res.json({ message: 'Yet to be implemented...' });
 };
 
-const updateCurrentUserDetails = () => {
-  console.log('Update Current User Details');
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const updateCurrentUserDetails = (_req: Request, res: Response, _next: NextFunction) => {
+  res.json({ message: 'Yet to be implemented...' });
 };
 
-const deleteCurrentUser = () => {
-  console.log('Delete Current User');
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const deleteCurrentUser = (_req: Request, res: Response, _next: NextFunction) => {
+  res.json({ message: 'Yet to be implemented...' });
 };
 
-const getUserDetails = () => {
-  console.log('Get User Details');
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const getUserDetails = (_req: Request, res: Response, _next: NextFunction) => {
+  res.json({ message: 'Yet to be implemented...' });
 };
 
 export { getCurrentUserDetails, updateCurrentUserDetails, deleteCurrentUser, getUserDetails };

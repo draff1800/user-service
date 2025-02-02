@@ -1,33 +1,37 @@
 import bcrypt from 'bcrypt';
 import { User } from '../models/user-model.js';
 import { InternalServerError } from '../errors/custom-errors/internal-server-error.js';
+import type { Request, Response, NextFunction } from 'express';
 
 const register = async (username: string, email: string, password: string) => {
-  const passwordHash = await bcrypt.hash(password, 10);
+  try {
+    const passwordHash = await bcrypt.hash(password, 10);
 
-  await User.create({
-    username,
-    email,
-    passwordHash,
-  })
-    .then((user) => {
-      return user.serialize;
-    })
-    .catch(() => {
-      throw new InternalServerError("Couldn't register user. Please try again later.");
+    const savedUser = await User.create({
+      username,
+      email,
+      passwordHash,
     });
+
+    return savedUser.serialize();
+  } catch {
+    throw new InternalServerError("Couldn't register user. Please try again later");
+  }
 };
 
-const login = () => {
-  console.log('Login');
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const login = (_req: Request, res: Response, _next: NextFunction) => {
+  res.json({ message: 'Yet to be implemented...' });
 };
 
-const verify = () => {
-  console.log('Verify');
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const verify = (_req: Request, res: Response, _next: NextFunction) => {
+  res.json({ message: 'Yet to be implemented...' });
 };
 
-const logout = () => {
-  console.log('Logout');
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const logout = (_req: Request, res: Response, _next: NextFunction) => {
+  res.json({ message: 'Yet to be implemented...' });
 };
 
 export { register, login, verify, logout };
