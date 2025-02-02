@@ -4,6 +4,8 @@ interface UserDocument extends Document {
   username: string;
   email: string;
   passwordHash: string;
+  createdDateTime: Date;
+  updatedDateTime: Date;
 }
 
 interface UserMethods {
