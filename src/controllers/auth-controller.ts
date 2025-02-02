@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import { User } from '../models/user-model.js';
+import { logger } from '../utils/logger.js';
 import { InternalServerError } from '../errors/custom-errors/internal-server-error.js';
 import type { Request, Response, NextFunction } from 'express';
 
@@ -11,6 +12,11 @@ const register = async (username: string, email: string, password: string) => {
       username,
       email,
       passwordHash,
+    });
+
+    logger.info('New user saved', {
+      userId: savedUser._id,
+      username: savedUser.username,
     });
 
     return savedUser.serialize();

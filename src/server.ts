@@ -1,9 +1,10 @@
 import app from './app.js';
 import config from './config.js';
+import { logger } from './utils/logger.js';
 
 const PORT = config.port;
 const NODEENV = config.nodeEnv;
 
 app.listen(PORT, () => {
-  console.log(`User Service running on port ${PORT} in ${NODEENV} mode`);
+  logger.info(`Started on port ${PORT} in ${NODEENV} mode`);
 });
