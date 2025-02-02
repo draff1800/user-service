@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { User } from '../models/user-model.js';
+import { User } from '../db/models/user-model.js';
 import { logger } from '../utils/logger.js';
 import { InternalServerError } from '../errors/custom-errors/internal-server-error.js';
 import type { Request, Response, NextFunction } from 'express';

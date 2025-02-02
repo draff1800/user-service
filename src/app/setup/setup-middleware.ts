@@ -2,7 +2,7 @@ import express from 'express';
 import { logger } from '../../utils/logger.js';
 import helmet from 'helmet';
 import cors from 'cors';
-import config from '../../config.js';
+import { envVariables } from '../../config.js';
 import morgan from 'morgan';
 
 export const setupMiddleware = (app: express.Application) => {
@@ -16,7 +16,7 @@ export const setupMiddleware = (app: express.Application) => {
     },
   };
 
-  if (config.nodeEnv === 'production') {
+  if (envVariables.nodeEnv === 'production') {
     app.use(morgan('combined', { stream: morganStream }));
   } else {
     app.use(morgan('dev', { stream: morganStream }));
