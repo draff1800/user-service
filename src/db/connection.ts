@@ -3,10 +3,11 @@ import mongoose from 'mongoose';
 import { logger } from '../utils/logger.js';
 
 export const connectToDb = async () => {
-  const { dbHost, dbPort, dbName } = envVariables;
+  const { dbUser, dbPassword, dbClusterName, dbDatabaseName } = envVariables;
+  const dbUri = `mongodb+srv://${dbUser}:${dbPassword}@${dbClusterName}.fszttko.mongodb.net/${dbDatabaseName}?retryWrites=true&w=majority&appName=${dbClusterName}`;
 
   try {
-    await mongoose.connect(`${dbHost}:${dbPort}/${dbName}`);
+    await mongoose.connect(dbUri);
   } catch (error) {
     logger.error('Initial connection to database failed. Shutting down...', { errorMessage: (error as Error).message });
     process.exit(1);
