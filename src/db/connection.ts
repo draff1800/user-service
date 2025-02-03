@@ -1,0 +1,74 @@
+import { envVariables } from '../config.js';
+import mongoose from 'mongoose';
+import { logger } from '../utils/logger.js';
+
+export const connectToDb = async () => {
+  const { dbHost, dbPort, dbName } = envVariables;
+
+  try {
+    await mongoose.connect(`${dbHost}:${dbPort}/${dbName}`);
+  } catch (error) {
+    logger.error('Initial connection to database failed. Shutting down...', { errorMessage: (error as Error).message });
+    process.exit(1);
+  }
+};
+
+let shuttingDown = false;
+let shutdownTimer: NodeJS.Timeout | null = null;
+const RECONNECT_TIMEOUT = 30000;
+
+mongoose.connection.on('connecting', () => {
+  logger.info(`Connecting to database...`);
+});
+
+mongoose.connection.on('connected', () => {
+  logger.info(`Successfully connected to database`);
+});
+
+mongoose.connection.on('disconnecting', () => {
+  logger.info(`Disconnecting from database...`);
+});
+
+mongoose.connection.on('disconnected', () => {
+  if (shuttingDown) {
+    logger.info(`Successfully disconnected from database`);
+  } else {
+    logger.error('Unexpectedly disconnected from database');
+
+    shutdownTimer = setTimeout(() => {
+      logger.error('Could not reconnect to database within timeout. Shutting down...');
+      process.exit(1);
+    }, RECONNECT_TIMEOUT);
+  }
+});
+
+mongoose.connection.on('reconnected', () => {
+  logger.info(`Successfully reconnected to database`);
+
+  if (shutdownTimer) {
+    clearTimeout(shutdownTimer);
+    shutdownTimer = null;
+  }
+});
+
+mongoose.connection.on('error', (error) => {
+  logger.error(`A database error occurred`, { errorMessage: error.message });
+});
+
+const gracefullyCloseConnection = async (nodeJsSignal: string) => {
+  process.on(nodeJsSignal, async () => {
+    shuttingDown = true;
+    logger.info(`${nodeJsSignal} signal received. Closing database connection...`);
+    try {
+      await mongoose.connection.close();
+      logger.info(`Gracefully closed database connection`);
+      process.exit(0);
+    } catch (error) {
+      logger.error('Graceful close of database connection failed', { errorMessage: (error as Error).message });
+      process.exit(1);
+    }
+  });
+};
+
+process.on('SIGINT', () => gracefullyCloseConnection('SIGINT'));
+process.on('SIGTERM', () => gracefullyCloseConnection('SIGTERM'));

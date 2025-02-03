@@ -1,5 +1,5 @@
 import { envVariables } from './config.js';
-import { connectToDb } from './db/connect.js';
+import { connectToDb } from './db/connection.js';
 import app from './app/app.js';
 import { logger } from './utils/logger.js';
 
