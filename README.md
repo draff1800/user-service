@@ -1,11 +1,7 @@
-# Real-Time Collaboration Tool - User Service
-One of three microservices powering the [Real-Time Collaboration Tool](#what-is-the-real-time-collaboration-tool).
+# User Service
+A microservice which handles user registration, authentication and account management.
 
 ![Development Status](https://img.shields.io/badge/status-in%20development-yellow)
-
-### Description
-Manages user registration, authentication and profile management.
-Integrates with other microservices for operations related to user data.
 
 ### Endpoints
 #### Authentication
@@ -23,13 +19,3 @@ Integrates with other microservices for operations related to user data.
 | <kbd>PUT /v1/users/me</kbd> | Update current user's profile
 | <kbd>DELETE /v1/users/me</kbd> | Delete current user's profile
 | <kbd>GET /v1/users/:userid</kbd> | Retrieve a specific user's profile
-
----
-
-### What is the Real-Time Collaboration Tool?
-A tool similar to Google Docs; Users are able to concurrently edit a shared document and see changes in real-time. Powered by a microservices-based back-end, it focuses on scalability and and efficient data synchronization.
-
-Check out the other microservices:
-* [Document Service](https://github.com/draff1800/real-time-collaboration-tool-document-service)
-* [Sync Service](https://github.com/draff1800/real-time-collaboration-tool-sync-service)
-
