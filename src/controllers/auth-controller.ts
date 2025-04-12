@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import { User } from '../db/models/user-model.js';
+import { capitalise } from '../utils/string-utils.js';
 import { logger } from '../utils/logger.js';
 import { InternalServerError } from '../errors/custom-errors/internal-server-error.js';
 import type { Request, Response, NextFunction } from 'express';
@@ -19,7 +20,7 @@ const register = async (username: string, email: string, password: string) => {
     });
   } catch (err: unknown) {
     if (err instanceof mongoose.mongo.MongoServerError && err.code === 11000) {
-      const field = Object.keys(err.keyValue)[0];
+      const field = capitalise(Object.keys(err.keyValue)[0]);
       throw new BadRequestError(`${field} is already taken`);
     } else {
       throw new InternalServerError(`Couldn't register user. Please try again later`);
