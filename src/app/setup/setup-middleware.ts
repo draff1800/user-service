@@ -16,7 +16,7 @@ export const setupMiddleware = (app: express.Application): void => {
     },
   };
 
-  if (envVariables.nodeEnv === 'Production') {
+  if (envVariables.nodeEnv === 'production') {
     app.use(morgan('combined', { stream: morganStream }));
   } else {
     app.use(morgan('dev', { stream: morganStream }));

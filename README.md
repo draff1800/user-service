@@ -1,7 +1,9 @@
 # User Service
+![Development Status](https://img.shields.io/badge/status-in%20development-yellow)
+
 A microservice which handles user registration, authentication and account management.
 
-![Development Status](https://img.shields.io/badge/status-in%20development-yellow)
+---
 
 ### Endpoints
 #### Authentication
@@ -19,3 +21,62 @@ A microservice which handles user registration, authentication and account manag
 | <kbd>PUT /v1/users/me</kbd> | Update current user's profile
 | <kbd>DELETE /v1/users/me</kbd> | Delete current user's profile
 | <kbd>GET /v1/users/:userid</kbd> | Retrieve a specific user's profile
+
+---
+
+### Setup
+
+#### Local Development
+
+##### Prerequisites
+
+- Node.js (>= 18.x)
+- npm (>= 9.x)
+- [MongoDB Cloud Database Cluster](https://www.mongodb.com/products/platform/cloud)
+
+##### Steps
+
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/draff1800/user-service.git
+    cd user-service
+    ```
+
+2. Install dependencies:
+
+    ```bash
+    npm install
+    ```
+
+3. Set up environment variables:
+
+    - Create a `.env`:
+
+      ```bash
+      cp .env.example .env
+      ```
+
+    - Adjust its values based on your desired configuration:
+
+      - `PORT`: Port the service will run on
+      - `NODE_ENV`: Environment configuration (`development` or `production`)
+      - `DB_USER`: MongoDB Database User username
+      - `DB_PASSWORD`: MongoDB Database User password
+      - `DB_CLUSTER_NAME`: MongoDB Cluster name
+      - `DB_DATABASE_NAME`: MongoDB Database name
+
+4. Start the service:
+
+    - To run in Development mode (server restarts on code changes):
+
+      ```bash
+      npm run start-dev
+      ```
+
+    - To run in Production mode (compiles to `dist` and runs):
+
+      ```bash
+      npm run build
+      npm run start
+      ```
