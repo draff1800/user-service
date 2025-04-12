@@ -5,7 +5,7 @@ import cors from 'cors';
 import { envVariables } from '../../config.js';
 import morgan from 'morgan';
 
-export const setupMiddleware = (app: express.Application) => {
+export const setupMiddleware = (app: express.Application): void => {
   app.use(helmet());
   app.use(cors());
   app.use(express.json());
@@ -16,7 +16,7 @@ export const setupMiddleware = (app: express.Application) => {
     },
   };
 
-  if (envVariables.nodeEnv === 'production') {
+  if (envVariables.nodeEnv === 'Production') {
     app.use(morgan('combined', { stream: morganStream }));
   } else {
     app.use(morgan('dev', { stream: morganStream }));

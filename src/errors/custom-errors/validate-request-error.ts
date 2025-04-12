@@ -1,3 +1,4 @@
+import type { SerialisedMultiError } from '../../types/serialised-errors.js';
 import { CustomError } from '../custom-error.js';
 
 export class ValidateRequestError extends CustomError {
@@ -11,7 +12,7 @@ export class ValidateRequestError extends CustomError {
     Object.setPrototypeOf(this, ValidateRequestError.prototype);
   }
 
-  override serialize(): { message: string; errors: string[] } {
+  override serialise(): SerialisedMultiError {
     return { message: this.message, errors: this.validationErrors };
   }
 }

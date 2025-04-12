@@ -1,3 +1,4 @@
+import type { SerialisedError } from '../../types/serialised-errors.js';
 import { CustomError } from '../custom-error.js';
 
 export class UnauthorizedError extends CustomError {
@@ -9,7 +10,7 @@ export class UnauthorizedError extends CustomError {
     Object.setPrototypeOf(this, UnauthorizedError.prototype);
   }
 
-  override serialize(): { message: string } {
+  override serialise(): SerialisedError {
     return { message: this.message };
   }
 }

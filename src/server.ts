@@ -9,5 +9,5 @@ const NODEENV = envVariables.nodeEnv;
 await connectToDb();
 
 app.listen(PORT, () => {
-  logger.info(`Started on port ${PORT} in ${NODEENV} mode`);
+  logger.info(`Started on Port ${PORT} in ${NODEENV} mode`);
 });

@@ -1,4 +1,5 @@
 import { Document, Model, Schema, model } from 'mongoose';
+import type SerialisedUser from '../../types/serialised-user.js';
 
 interface UserDocument extends Document {
   username: string;
@@ -9,7 +10,7 @@ interface UserDocument extends Document {
 }
 
 interface UserMethods {
-  serialize(): { username: string; email: string; createdDateTime: Date; updatedDateTime: Date };
+  serialise(): SerialisedUser;
 }
 
 type UserModel = Model<UserDocument, object, UserMethods>;
@@ -24,7 +25,7 @@ const userSchema: Schema = new Schema<UserDocument, UserModel, UserMethods>(
     timestamps: { createdAt: 'createdDateTime', updatedAt: 'updatedDateTime' },
   },
 );
-userSchema.method('serialize', function serialize() {
+userSchema.method('serialise', function serialise(this: UserDocument): SerialisedUser {
   return {
     username: this.username,
     email: this.email,

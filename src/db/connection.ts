@@ -2,7 +2,7 @@ import { envVariables } from '../config.js';
 import mongoose from 'mongoose';
 import { logger } from '../utils/logger.js';
 
-export const connectToDb = async () => {
+export const connectToDb = async (): Promise<void> => {
   const { dbUser, dbPassword, dbClusterName, dbDatabaseName } = envVariables;
   const dbUri = `mongodb+srv://${dbUser}:${dbPassword}@${dbClusterName}.fszttko.mongodb.net/${dbDatabaseName}?retryWrites=true&w=majority&appName=${dbClusterName}`;
 
