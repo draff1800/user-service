@@ -8,6 +8,16 @@ export const validateRegisterBody = [
     .notEmpty()
     .withMessage('Username must not be empty'),
   body('email').isEmail().withMessage('Email must be a valid email'),
-  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
+  body('password')
+    .isStrongPassword({
+      minLength: 8,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 1,
+    })
+    .withMessage(
+      'Password must be at least 8 characters long, with 1 lowercase letter, 1 uppercase letter, 1 number and 1 symbol.',
+    ),
   checkForValidationErrors,
 ];
