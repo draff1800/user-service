@@ -6,7 +6,7 @@ export class BadRequestError extends CustomError {
   readonly StatusCode = 400;
 
   constructor(message?: string) {
-    super(message ? `${BadRequestError.statusPhrase}: ${message}` : `${BadRequestError.statusPhrase}`);
+    super(message ? message : BadRequestError.statusPhrase);
     Object.setPrototypeOf(this, BadRequestError.prototype);
   }
 

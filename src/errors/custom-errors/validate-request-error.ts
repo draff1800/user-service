@@ -7,7 +7,7 @@ export class ValidateRequestError extends CustomError {
   readonly StatusCode = 400;
 
   constructor(message?: string, validationErrors?: string[]) {
-    super(message ? `${ValidateRequestError.statusPhrase}: ${message}` : `${ValidateRequestError.statusPhrase}`);
+    super(message ? message : ValidateRequestError.statusPhrase);
     this.validationErrors = validationErrors || [];
     Object.setPrototypeOf(this, ValidateRequestError.prototype);
   }

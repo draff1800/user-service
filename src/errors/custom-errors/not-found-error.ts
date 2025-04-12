@@ -6,7 +6,7 @@ export class NotFoundError extends CustomError {
   readonly StatusCode = 404;
 
   constructor(message?: string) {
-    super(message ? `${NotFoundError.statusPhrase}: ${message}` : `${NotFoundError.statusPhrase}`);
+    super(message ? message : NotFoundError.statusPhrase);
     Object.setPrototypeOf(this, NotFoundError.prototype);
   }
 

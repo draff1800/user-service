@@ -6,7 +6,7 @@ export class InternalServerError extends CustomError {
   readonly StatusCode = 500;
 
   constructor(message?: string) {
-    super(message ? `${InternalServerError.statusPhrase}: ${message}` : `${InternalServerError.statusPhrase}`);
+    super(message ? message : InternalServerError.statusPhrase);
     Object.setPrototypeOf(this, InternalServerError.prototype);
   }
 
