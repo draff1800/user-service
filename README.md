@@ -68,13 +68,13 @@ A microservice which handles user registration, authentication and account manag
 
 4. Start the service:
 
-    - To run in Development mode (server restarts on code changes):
+    - Development mode (server restarts on code changes):
 
       ```bash
       npm run start-dev
       ```
 
-    - To run in Production mode (compiles to `dist` and runs):
+    - Production mode (compiles to `dist` and runs):
 
       ```bash
       npm run build
