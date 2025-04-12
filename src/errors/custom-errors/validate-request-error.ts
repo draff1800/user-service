@@ -1,4 +1,4 @@
-import type { SerialisedMultiError } from '../../types/serialised-errors.js';
+import type { SerialisedMultiError } from '../../types/errors.js';
 import { CustomError } from '../custom-error.js';
 
 export class ValidateRequestError extends CustomError {

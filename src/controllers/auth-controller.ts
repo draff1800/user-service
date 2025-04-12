@@ -2,8 +2,7 @@ import type { Request, Response, NextFunction } from 'express';
 import { registerUser } from '../services/auth-service.js';
 
 const register = async (req: Request, res: Response, _next: NextFunction): Promise<void> => {
-  const { username, email, password } = req.body;
-  const savedUser = await registerUser(username, email, password);
+  const savedUser = await registerUser(req.body);
   res.status(201).json(savedUser);
 };
 

@@ -5,9 +5,11 @@ import { logger } from '../utils/logger.js';
 import { InternalServerError } from '../errors/custom-errors/internal-server-error.js';
 import { BadRequestError } from '../errors/custom-errors/bad-request-error.js';
 import mongoose from 'mongoose';
-import type SerialisedUser from '../types/serialised-user.js';
+import type { RegistrationData, SerialisedUser } from '../types/auth.js';
 
-const registerUser = async (username: string, email: string, password: string): Promise<SerialisedUser> => {
+const registerUser = async (registrationData: RegistrationData): Promise<SerialisedUser> => {
+  const { username, email, password } = registrationData;
+
   const passwordHash = await bcrypt.hash(password, 10);
 
   let savedUser;

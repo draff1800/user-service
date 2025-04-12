@@ -1,5 +1,5 @@
 import { Document, Model, Schema, model } from 'mongoose';
-import type SerialisedUser from '../../types/serialised-user.js';
+import type { SerialisedUser } from '../../types/auth.js';
 
 interface UserDocument extends Document {
   username: string;

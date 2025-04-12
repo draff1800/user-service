@@ -1,4 +1,4 @@
-import type { SerialisedError } from '../../types/serialised-errors.js';
+import type { SerialisedError } from '../../types/errors.js';
 import { CustomError } from '../custom-error.js';
 
 export class InternalServerError extends CustomError {
