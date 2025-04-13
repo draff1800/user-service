@@ -1,4 +1,4 @@
-import type { SerialisedError } from '../../types/errors.js';
+import type { Info } from '../../types/info.js';
 import { CustomError } from '../custom-error.js';
 
 export class InternalServerError extends CustomError {
@@ -10,7 +10,7 @@ export class InternalServerError extends CustomError {
     Object.setPrototypeOf(this, InternalServerError.prototype);
   }
 
-  override serialise(): SerialisedError {
+  override serialise(): Info {
     return { message: this.message };
   }
 }

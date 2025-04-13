@@ -1,8 +1,9 @@
 import type { NextFunction, Request, Response } from 'express';
 import { logger } from '../utils/logger.js';
 import { CustomError } from '../errors/custom-error.js';
+import type { Info } from '../types/info.js';
 
-export const handleError = (err: Error, req: Request, res: Response, _next: NextFunction): void => {
+export const handleError = (err: Error, req: Request, res: Response<Info>, _next: NextFunction): void => {
   logger.error('Error caught by central error handler', {
     method: req.method,
     url: req.url,

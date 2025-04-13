@@ -1,18 +1,19 @@
 import type { Request, Response, NextFunction } from 'express';
+import type { Info } from '../types/info.js';
 
-const getCurrentUserDetails = (_req: Request, res: Response, _next: NextFunction): void => {
+const getCurrentUserDetails = (_req: Request, res: Response<Info>, _next: NextFunction): void => {
   res.json({ message: 'Yet to be implemented...' });
 };
 
-const updateCurrentUserDetails = (_req: Request, res: Response, _next: NextFunction): void => {
+const updateCurrentUserDetails = (_req: Request, res: Response<Info>, _next: NextFunction): void => {
   res.json({ message: 'Yet to be implemented...' });
 };
 
-const deleteCurrentUser = (_req: Request, res: Response, _next: NextFunction): void => {
+const deleteCurrentUser = (_req: Request, res: Response<Info>, _next: NextFunction): void => {
   res.json({ message: 'Yet to be implemented...' });
 };
 
-const getUserDetails = (_req: Request, res: Response, _next: NextFunction): void => {
+const getUserDetails = (_req: Request, res: Response<Info>, _next: NextFunction): void => {
   res.json({ message: 'Yet to be implemented...' });
 };
 
