@@ -65,6 +65,7 @@ A microservice which handles user registration, authentication and account manag
       - `DB_PASSWORD`: MongoDB Database User password
       - `DB_CLUSTER_NAME`: MongoDB Cluster name
       - `DB_DATABASE_NAME`: MongoDB Database name
+      - `JWT_SECRET`: The secret key used to sign JSON Web Tokens
 
 4. Start the service:
 

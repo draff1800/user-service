@@ -1,11 +1,14 @@
-import bcrypt from 'bcrypt';
+import { envVariables } from '../config.js';
 import { User } from '../db/models/user-model.js';
 import { capitalise } from '../utils/string-utils.js';
 import { logger } from '../utils/logger.js';
 import { InternalServerError } from '../errors/custom-errors/internal-server-error.js';
 import { BadRequestError } from '../errors/custom-errors/bad-request-error.js';
+import type { LoginData, LoginResponse, RegistrationData, SerialisedUser } from '../types/auth.js';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
-import type { RegistrationData, SerialisedUser } from '../types/auth.js';
+import { UnauthorizedError } from '../errors/custom-errors/unauthorized-error.js';
 
 const registerUser = async (registrationData: RegistrationData): Promise<SerialisedUser> => {
   const { username, email, password } = registrationData;
@@ -37,4 +40,27 @@ const registerUser = async (registrationData: RegistrationData): Promise<Seriali
   return savedUser.serialise();
 };
 
-export { registerUser };
+const loginUser = async (loginData: LoginData): Promise<LoginResponse> => {
+  const { email, password } = loginData;
+
+  const invalidCredentialsError = new UnauthorizedError('Invalid credentials');
+
+  const user = await User.findOne({ email });
+  if (!user) throw invalidCredentialsError;
+
+  const passwordMatch = await bcrypt.compare(password, user.passwordHash);
+  if (!passwordMatch) throw invalidCredentialsError;
+
+  const token = jwt.sign(
+    {
+      sub: user._id.toString(),
+      username: user.username,
+    },
+    envVariables.jwtSecret,
+    { expiresIn: '1h' },
+  );
+
+  return { token };
+};
+
+export { registerUser, loginUser };

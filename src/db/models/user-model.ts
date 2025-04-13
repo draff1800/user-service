@@ -1,7 +1,8 @@
-import { Document, Model, Schema, model } from 'mongoose';
+import { Document, Model, Schema, Types, model } from 'mongoose';
 import type { SerialisedUser } from '../../types/auth.js';
 
 interface UserDocument extends Document {
+  _id: Types.ObjectId;
   username: string;
   email: string;
   passwordHash: string;
