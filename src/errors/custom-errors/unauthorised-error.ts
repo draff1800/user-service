@@ -1,13 +1,13 @@
 import type { SerialisedError } from '../../types/errors.js';
 import { CustomError } from '../custom-error.js';
 
-export class UnauthorizedError extends CustomError {
+export class UnauthorisedError extends CustomError {
   private static readonly statusPhrase = 'Unauthorized';
   readonly StatusCode = 401;
 
   constructor(message?: string) {
-    super(message ? message : UnauthorizedError.statusPhrase);
-    Object.setPrototypeOf(this, UnauthorizedError.prototype);
+    super(message ? message : UnauthorisedError.statusPhrase);
+    Object.setPrototypeOf(this, UnauthorisedError.prototype);
   }
 
   override serialise(): SerialisedError {

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { authenticateUser } from '../middleware/authenticate-user-middleware.js';
+import { verifyAuthToken } from '../middleware/verify-auth-token-middleware.js';
 import {
   getCurrentUserDetails,
   updateCurrentUserDetails,
@@ -9,7 +9,7 @@ import {
 
 const userRouter = Router();
 
-userRouter.use(authenticateUser);
+userRouter.use(verifyAuthToken);
 
 userRouter.get('/me', getCurrentUserDetails);
 userRouter.put('/me', updateCurrentUserDetails);

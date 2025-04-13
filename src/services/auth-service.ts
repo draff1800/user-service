@@ -4,14 +4,16 @@ import { capitalise } from '../utils/string-utils.js';
 import { logger } from '../utils/logger.js';
 import { InternalServerError } from '../errors/custom-errors/internal-server-error.js';
 import { BadRequestError } from '../errors/custom-errors/bad-request-error.js';
-import type { LoginData, LoginResponse, RegistrationData, SerialisedUser } from '../types/auth.js';
+import type { LoginPayload, RegisterPayload } from '../types/payloads/auth-payloads.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
-import { UnauthorizedError } from '../errors/custom-errors/unauthorized-error.js';
+import { UnauthorisedError } from '../errors/custom-errors/unauthorised-error.js';
+import type { AuthTokenContents } from '../types/auth-token-contents.js';
+import type { LoginResponse, RegisterResponse } from '../types/responses/auth-responses.js';
 
-const registerUser = async (registrationData: RegistrationData): Promise<SerialisedUser> => {
-  const { username, email, password } = registrationData;
+const registerUser = async (registerPayload: RegisterPayload): Promise<RegisterResponse> => {
+  const { username, email, password } = registerPayload;
 
   const passwordHash = await bcrypt.hash(password, 10);
 
@@ -37,13 +39,17 @@ const registerUser = async (registrationData: RegistrationData): Promise<Seriali
     username: savedUser.username,
   });
 
-  return savedUser.serialise();
+  return {
+    username: savedUser.username,
+    email: savedUser.email,
+    createdDateTime: savedUser.createdDateTime,
+  };
 };
 
-const loginUser = async (loginData: LoginData): Promise<LoginResponse> => {
-  const { email, password } = loginData;
+const loginUser = async (loginPayload: LoginPayload): Promise<LoginResponse> => {
+  const { email, password } = loginPayload;
 
-  const invalidCredentialsError = new UnauthorizedError('Invalid credentials');
+  const invalidCredentialsError = new UnauthorisedError('Invalid credentials');
 
   const user = await User.findOne({ email });
   if (!user) throw invalidCredentialsError;
@@ -51,14 +57,12 @@ const loginUser = async (loginData: LoginData): Promise<LoginResponse> => {
   const passwordMatch = await bcrypt.compare(password, user.passwordHash);
   if (!passwordMatch) throw invalidCredentialsError;
 
-  const token = jwt.sign(
-    {
-      sub: user._id.toString(),
-      username: user.username,
-    },
-    envVariables.jwtSecret,
-    { expiresIn: '1h' },
-  );
+  const tokenContents: AuthTokenContents = {
+    sub: user._id.toString(),
+    username: user.username,
+  };
+
+  const token = jwt.sign(tokenContents, envVariables.jwtSecret, { expiresIn: '1h' });
 
   return { token };
 };
