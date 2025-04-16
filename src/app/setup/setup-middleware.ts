@@ -2,7 +2,7 @@ import express from 'express';
 import { logger } from '../../utils/logger.js';
 import helmet from 'helmet';
 import cors from 'cors';
-import { envVariables } from '../../config.js';
+import { envVariables } from '../../config/env-variables.js';
 import morgan from 'morgan';
 
 export const setupMiddleware = (app: express.Application): void => {

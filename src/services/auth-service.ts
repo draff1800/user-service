@@ -1,23 +1,21 @@
-import { envVariables } from '../config.js';
-import { User } from '../db/models/user-model.js';
-import { capitalise } from '../utils/string-utils.js';
+import { envVariables } from '../config/env-variables.js';
+import { User, type UserDocument, type UserMethods } from '../db/models/user-model.js';
 import { logger } from '../utils/logger.js';
-import { InternalServerError } from '../errors/custom-errors/internal-server-error.js';
-import { BadRequestError } from '../errors/custom-errors/bad-request-error.js';
 import type { LoginPayload, RegisterPayload } from '../types/payloads/auth-payloads.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import mongoose from 'mongoose';
 import { UnauthorisedError } from '../errors/custom-errors/unauthorised-error.js';
 import type { AuthTokenContents } from '../types/auth-token-contents.js';
-import type { LoginResponse, RegisterResponse } from '../types/responses/auth-responses.js';
+import type { LoginResponse } from '../types/responses/auth-responses.js';
+import { saveUserError } from '../utils/mongoose-utils.js';
+import type { SerialisedNewUser } from '../types/serialised-users.js';
 
-const registerUser = async (registerPayload: RegisterPayload): Promise<RegisterResponse> => {
+const registerUser = async (registerPayload: RegisterPayload): Promise<SerialisedNewUser> => {
   const { username, email, password } = registerPayload;
 
   const passwordHash = await bcrypt.hash(password, 10);
 
-  let savedUser;
+  let savedUser: UserDocument & UserMethods;
 
   try {
     savedUser = await User.create({
@@ -26,12 +24,7 @@ const registerUser = async (registerPayload: RegisterPayload): Promise<RegisterR
       passwordHash,
     });
   } catch (err: unknown) {
-    if (err instanceof mongoose.mongo.MongoServerError && err.code === 11000) {
-      const field = capitalise(Object.keys(err.keyValue)[0]);
-      throw new BadRequestError(`${field} is already taken`);
-    } else {
-      throw new InternalServerError(`Couldn't register user. Please try again later`);
-    }
+    throw saveUserError(err, `Couldn't save user. Please try again later`);
   }
 
   logger.info('New User saved', {
@@ -39,11 +32,7 @@ const registerUser = async (registerPayload: RegisterPayload): Promise<RegisterR
     username: savedUser.username,
   });
 
-  return {
-    username: savedUser.username,
-    email: savedUser.email,
-    createdDateTime: savedUser.createdDateTime,
-  };
+  return savedUser.serialiseNewUser();
 };
 
 const loginUser = async (loginPayload: LoginPayload): Promise<LoginResponse> => {

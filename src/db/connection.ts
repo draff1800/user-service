@@ -1,4 +1,4 @@
-import { envVariables } from '../config.js';
+import { envVariables } from '../config/env-variables.js';
 import mongoose from 'mongoose';
 import { logger } from '../utils/logger.js';
 

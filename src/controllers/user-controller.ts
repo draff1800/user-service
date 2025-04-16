@@ -1,12 +1,12 @@
 import type { Request, Response, NextFunction } from 'express';
 import type { Info } from '../types/info.js';
-import type { SerialisedUser } from '../types/serialised-user.js';
-import { getUserById } from '../services/user-service.js';
+import { getUserById, updateUserById } from '../services/user-service.js';
 import { InternalServerError } from '../errors/custom-errors/internal-server-error.js';
+import type { SerialisedExistingUser } from '../types/serialised-users.js';
 
 const getCurrentUserDetails = async (
   req: Request,
-  res: Response<SerialisedUser>,
+  res: Response<SerialisedExistingUser>,
   _next: NextFunction,
 ): Promise<void> => {
   if (!req.authTokenContents) {
@@ -17,8 +17,17 @@ const getCurrentUserDetails = async (
   res.status(200).json(user);
 };
 
-const updateCurrentUserDetails = (_req: Request, res: Response<Info>, _next: NextFunction): void => {
-  res.json({ message: 'Yet to be implemented...' });
+const updateCurrentUserDetails = async (
+  req: Request,
+  res: Response<SerialisedExistingUser>,
+  _next: NextFunction,
+): Promise<void> => {
+  if (!req.authTokenContents) {
+    throw new InternalServerError('Unexpected authorisation error occurred');
+  }
+
+  const user = await updateUserById(req.authTokenContents.sub, req.body);
+  res.status(200).json(user);
 };
 
 const deleteCurrentUser = (_req: Request, res: Response<Info>, _next: NextFunction): void => {

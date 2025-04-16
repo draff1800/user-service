@@ -7,14 +7,15 @@ import {
   getUserDetails,
 } from '../controllers/user-controller.js';
 import { handleAsync } from '../middleware/handle-async-middleware.js';
+import { validateUpdatePayload } from '../middleware/request-validators/validate-update-payload-middleware.js';
 
 const userRouter = Router();
 
 userRouter.use(verifyAuthToken);
 
-userRouter.get('/me', verifyAuthToken, handleAsync(getCurrentUserDetails));
+userRouter.get('/me', handleAsync(getCurrentUserDetails));
+userRouter.put('/me', validateUpdatePayload, handleAsync(updateCurrentUserDetails));
 
-userRouter.put('/me', updateCurrentUserDetails);
 userRouter.delete('/me', deleteCurrentUser);
 userRouter.get('/:id', getUserDetails);
 
