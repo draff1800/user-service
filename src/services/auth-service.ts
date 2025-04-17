@@ -1,14 +1,12 @@
-import { envVariables } from '../config/env-variables.js';
 import { User, type UserDocument, type UserMethods } from '../db/models/user-model.js';
 import { logger } from '../utils/logger.js';
 import type { LoginPayload, RegisterPayload } from '../types/payloads/auth-payloads.js';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import { UnauthorisedError } from '../errors/custom-errors/unauthorised-error.js';
-import type { AuthTokenContents } from '../types/auth-token-contents.js';
 import type { LoginResponse } from '../types/responses/auth-responses.js';
 import { saveUserError } from '../utils/mongoose-utils.js';
 import type { SerialisedNewUser } from '../types/serialised-users.js';
+import { generateJwtForUser } from '../utils/jwt-utils.js';
 
 const registerUser = async (registerPayload: RegisterPayload): Promise<SerialisedNewUser> => {
   const { username, email, password } = registerPayload;
@@ -46,12 +44,8 @@ const loginUser = async (loginPayload: LoginPayload): Promise<LoginResponse> => 
   const passwordMatch = await bcrypt.compare(password, user.passwordHash);
   if (!passwordMatch) throw invalidCredentialsError;
 
-  const tokenContents: AuthTokenContents = {
-    sub: user._id.toString(),
-    username: user.username,
-  };
-
-  const token = jwt.sign(tokenContents, envVariables.jwtSecret, { expiresIn: '1h' });
+  const userId = user._id.toString();
+  const token = generateJwtForUser(userId, user.username);
 
   return { token };
 };
