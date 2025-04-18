@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from 'express';
 
 import { InternalServerError } from '../errors/custom-errors/internal-server-error.js';
-import { deleteUserById, getUserById, updateUserById } from '../services/user-service.js';
+import { deleteUserById, getUserById, getUserByUsername, updateUserById } from '../services/user-service.js';
 import type { Info } from '../types/info.js';
 import type { UpdateCurrentUserDetailsResponse } from '../types/responses/user-responses.js';
 import type { SerialisedExistingUser } from '../types/serialised-users.js';
@@ -51,8 +51,17 @@ const deleteCurrentUser = async (req: Request, res: Response<Info>, _next: NextF
   res.status(200).json({ message: 'User deleted' });
 };
 
-const getUserDetails = (_req: Request, res: Response<Info>, _next: NextFunction): void => {
-  res.json({ message: 'Yet to be implemented...' });
+const getUserDetails = async (
+  req: Request,
+  res: Response<SerialisedExistingUser>,
+  _next: NextFunction,
+): Promise<void> => {
+  const username = req.params.username;
+  if (!username) throw new InternalServerError('Unexpected error occurred when reading username');
+
+  const user = await getUserByUsername(username);
+
+  res.status(200).json(user);
 };
 
 export { deleteCurrentUser, getCurrentUserDetails, getUserDetails, updateCurrentUserDetails };

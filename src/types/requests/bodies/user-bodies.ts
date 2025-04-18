@@ -1,4 +1,4 @@
-export interface UpdatePayload {
+export interface UpdateBody {
   newUsername?: string;
   newEmail?: string;
   newPassword?: string;

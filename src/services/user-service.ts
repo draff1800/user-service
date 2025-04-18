@@ -1,8 +1,10 @@
 import bcrypt from 'bcrypt';
 
+import { User } from '../db/models/user-model.js';
 import { InternalServerError } from '../errors/custom-errors/internal-server-error.js';
+import { NotFoundError } from '../errors/custom-errors/not-found-error.js';
 import { UnauthorisedError } from '../errors/custom-errors/unauthorised-error.js';
-import type { UpdatePayload } from '../types/payloads/user-payloads.js';
+import type { UpdateBody } from '../types/requests/bodies/user-bodies.js';
 import type { SerialisedExistingUser } from '../types/serialised-users.js';
 import { findUserByIdOrThrow, saveUserError } from '../utils/mongoose-utils.js';
 
@@ -12,8 +14,8 @@ const getUserById = async (id: string): Promise<SerialisedExistingUser> => {
   return user.serialiseExistingUser();
 };
 
-const updateUserById = async (id: string, updatePayload: UpdatePayload): Promise<SerialisedExistingUser> => {
-  const { newEmail, newUsername, newPassword, currentPassword } = updatePayload;
+const updateUserById = async (id: string, updateBody: UpdateBody): Promise<SerialisedExistingUser> => {
+  const { newEmail, newUsername, newPassword, currentPassword } = updateBody;
 
   const user = await findUserByIdOrThrow(id);
 
@@ -57,4 +59,18 @@ const deleteUserById = async (id: string): Promise<void> => {
   }
 };
 
-export { deleteUserById, getUserById, updateUserById };
+const getUserByUsername = async (username: string): Promise<SerialisedExistingUser> => {
+  let user;
+
+  try {
+    user = await User.findOne({ username });
+  } catch {
+    throw new InternalServerError("Couldn't get User - Unexpected error occurred");
+  }
+
+  if (!user) throw new NotFoundError('User not found');
+
+  return user.serialiseExistingUser();
+};
+
+export { deleteUserById, getUserById, getUserByUsername, updateUserById };

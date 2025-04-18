@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 import { envVariables } from '../config/env-variables.js';
 import { UnauthorisedError } from '../errors/custom-errors/unauthorised-error.js';
-import type { AuthTokenContents } from '../types/auth-token-contents.js';
+import type { AuthTokenContents } from '../types/requests/auth-token-contents.js';
 
 export const verifyAuthToken = (req: Request, _res: Response, next: NextFunction): void => {
   const authHeader = req.header('Authorization');

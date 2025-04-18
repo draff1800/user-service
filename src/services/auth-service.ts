@@ -4,15 +4,15 @@ import { User, type UserDocument, type UserMethods } from '../db/models/user-mod
 import type { CustomError } from '../errors/custom-error.js';
 import { InternalServerError } from '../errors/custom-errors/internal-server-error.js';
 import { UnauthorisedError } from '../errors/custom-errors/unauthorised-error.js';
-import type { LoginPayload, RegisterPayload } from '../types/payloads/auth-payloads.js';
+import type { LoginBody, RegisterBody } from '../types/requests/bodies/auth-bodies.js';
 import type { LoginResponse } from '../types/responses/auth-responses.js';
 import type { SerialisedNewUser } from '../types/serialised-users.js';
 import { generateJwtForUser } from '../utils/jwt-utils.js';
 import { logger } from '../utils/logger.js';
 import { findUserByIdOrThrow, saveUserError } from '../utils/mongoose-utils.js';
 
-const registerUser = async (registerPayload: RegisterPayload): Promise<SerialisedNewUser> => {
-  const { username, email, password } = registerPayload;
+const registerUser = async (registerBody: RegisterBody): Promise<SerialisedNewUser> => {
+  const { username, email, password } = registerBody;
 
   const passwordHash = await bcrypt.hash(password, 10);
 
@@ -36,8 +36,8 @@ const registerUser = async (registerPayload: RegisterPayload): Promise<Serialise
   return savedUser.serialiseNewUser();
 };
 
-const loginUser = async (loginPayload: LoginPayload): Promise<LoginResponse> => {
-  const { email, password } = loginPayload;
+const loginUser = async (loginBody: LoginBody): Promise<LoginResponse> => {
+  const { email, password } = loginBody;
 
   const invalidCredentialsError = new UnauthorisedError('Invalid credentials');
 

@@ -1,17 +1,17 @@
 import { body } from 'express-validator';
 
-import { MIN_PASSWORD_LENGTH } from '../../../config/constants.js';
+import { MIN_PASSWORD_LENGTH, validatorMessages } from '../../../../config/constants.js';
 import { checkForValidationErrors } from './check-for-validation-errors-middleware.js';
 
 export const validateUpdatePayload = [
   body('newUsername')
     .optional()
     .isString()
-    .withMessage('Username must be a string')
+    .withMessage(validatorMessages.isString('Username'))
     .notEmpty()
-    .withMessage('Username must not be empty'),
+    .withMessage(validatorMessages.notEmpty('Username')),
 
-  body('newEmail').optional().isEmail().withMessage('Email must be a valid email'),
+  body('newEmail').optional().isEmail().withMessage(validatorMessages.isEmail('Email')),
 
   body('newPassword')
     .optional()
