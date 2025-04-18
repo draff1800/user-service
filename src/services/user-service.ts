@@ -1,11 +1,10 @@
 import bcrypt from 'bcrypt';
 
-import { User, type UserDocument, type UserMethods } from '../db/models/user-model.js';
-import { NotFoundError } from '../errors/custom-errors/not-found-error.js';
+import { InternalServerError } from '../errors/custom-errors/internal-server-error.js';
 import { UnauthorisedError } from '../errors/custom-errors/unauthorised-error.js';
 import type { UpdatePayload } from '../types/payloads/user-payloads.js';
 import type { SerialisedExistingUser } from '../types/serialised-users.js';
-import { saveUserError } from '../utils/mongoose-utils.js';
+import { findUserByIdOrThrow, saveUserError } from '../utils/mongoose-utils.js';
 
 const getUserById = async (id: string): Promise<SerialisedExistingUser> => {
   const user = await findUserByIdOrThrow(id);
@@ -27,18 +26,11 @@ const updateUserById = async (id: string, updatePayload: UpdatePayload): Promise
 
   try {
     await user.save();
-  } catch (err: unknown) {
+  } catch (err) {
     throw saveUserError(err, `Couldn't update user. Please try again later`);
   }
 
   return user.serialiseExistingUser();
-};
-
-const findUserByIdOrThrow = async (id: string): Promise<UserDocument & UserMethods> => {
-  const user = await User.findById(id);
-  if (!user) throw new NotFoundError('User not found');
-
-  return user;
 };
 
 const getNewPasswordHashOrThrow = async (
@@ -55,4 +47,14 @@ const getNewPasswordHashOrThrow = async (
   return await bcrypt.hash(newPassword, 10);
 };
 
-export { getUserById, updateUserById };
+const deleteUserById = async (id: string): Promise<void> => {
+  const user = await findUserByIdOrThrow(id);
+
+  try {
+    await user.deleteOne();
+  } catch {
+    throw new InternalServerError("Couldn't delete User - Unexpected error occurred");
+  }
+};
+
+export { deleteUserById, getUserById, updateUserById };

@@ -9,8 +9,8 @@ export const connectToDb = async (): Promise<void> => {
 
   try {
     await mongoose.connect(dbUri);
-  } catch (error) {
-    logger.error('Initial connection to database failed. Shutting down...', { errorMessage: (error as Error).message });
+  } catch (err) {
+    logger.error('Initial connection to database failed. Shutting down...', { errorMessage: (err as Error).message });
     process.exit(1);
   }
 };
@@ -65,8 +65,8 @@ const gracefullyCloseConnection = async (nodeJsSignal: string) => {
       await mongoose.connection.close();
       logger.info(`Gracefully closed database connection`);
       process.exit(0);
-    } catch (error) {
-      logger.error('Graceful close of database connection failed', { errorMessage: (error as Error).message });
+    } catch (err) {
+      logger.error('Graceful close of database connection failed', { errorMessage: (err as Error).message });
       process.exit(1);
     }
   });

@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from 'express';
 
 import { InternalServerError } from '../errors/custom-errors/internal-server-error.js';
-import { loginUser, registerUser } from '../services/auth-service.js';
+import { loginUser, registerUser, verifyUser } from '../services/auth-service.js';
 import type { Info } from '../types/info.js';
 import type { LoginResponse, VerifyResponse } from '../types/responses/auth-responses.js';
 import type { SerialisedNewUser } from '../types/serialised-users.js';
@@ -16,10 +16,14 @@ const login = async (req: Request, res: Response<LoginResponse>, _next: NextFunc
   res.status(200).json(loginResponse);
 };
 
-const verify = (req: Request, res: Response<VerifyResponse>, _next: NextFunction): void => {
+const verify = async (req: Request, res: Response<VerifyResponse>, _next: NextFunction): Promise<void> => {
   if (!req.authTokenContents) {
     throw new InternalServerError('Unexpected authorisation error occurred');
   }
+
+  const userId = req.authTokenContents.sub;
+
+  await verifyUser(userId);
 
   const verifyResponse = {
     user: {

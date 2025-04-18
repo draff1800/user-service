@@ -15,6 +15,6 @@ export const handleError = (err: Error, req: Request, res: Response<Info>, _next
   if (err instanceof CustomError) {
     res.status(err.StatusCode).json(err.serialise());
   } else {
-    res.status(500).json({ message: 'An unexpected error occurred.' });
+    res.status(500).json({ message: 'An unexpected error occurred' });
   }
 };

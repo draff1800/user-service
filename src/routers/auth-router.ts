@@ -10,7 +10,7 @@ const authRouter = Router();
 
 authRouter.post('/register', validateRegisterPayload, handleAsync(register));
 authRouter.post('/login', validateLoginPayload, handleAsync(login));
-authRouter.post('/verify', verifyAuthToken, verify);
+authRouter.post('/verify', verifyAuthToken, handleAsync(verify));
 authRouter.post('/logout', logout);
 
 export { authRouter };

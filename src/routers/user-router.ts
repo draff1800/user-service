@@ -17,7 +17,7 @@ userRouter.use(verifyAuthToken);
 userRouter.get('/me', handleAsync(getCurrentUserDetails));
 userRouter.put('/me', validateUpdatePayload, handleAsync(updateCurrentUserDetails));
 
-userRouter.delete('/me', deleteCurrentUser);
+userRouter.delete('/me', handleAsync(deleteCurrentUser));
 userRouter.get('/:id', getUserDetails);
 
 export { userRouter };
