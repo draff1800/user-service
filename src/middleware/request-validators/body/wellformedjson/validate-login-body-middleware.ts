@@ -3,7 +3,7 @@ import { body } from 'express-validator';
 import { validatorMessages } from '../../../../config/constants.js';
 import { checkForValidationErrors } from './check-for-validation-errors-middleware.js';
 
-export const validateLoginPayload = [
+export const validateLoginBody = [
   body('email').isEmail().withMessage(validatorMessages.isEmail('Email')),
 
   body('password')

@@ -3,16 +3,18 @@ import { body } from 'express-validator';
 import { MIN_PASSWORD_LENGTH, validatorMessages } from '../../../../config/constants.js';
 import { checkForValidationErrors } from './check-for-validation-errors-middleware.js';
 
-export const validateRegisterPayload = [
-  body('username')
+export const validateUpdateBody = [
+  body('newUsername')
+    .optional()
     .isString()
     .withMessage(validatorMessages.isString('Username'))
     .notEmpty()
     .withMessage(validatorMessages.notEmpty('Username')),
 
-  body('email').isEmail().withMessage(validatorMessages.isEmail('Email')),
+  body('newEmail').optional().isEmail().withMessage(validatorMessages.isEmail('Email')),
 
-  body('password')
+  body('newPassword')
+    .optional()
     .isStrongPassword({
       minLength: MIN_PASSWORD_LENGTH,
       minLowercase: 1,
@@ -23,6 +25,11 @@ export const validateRegisterPayload = [
     .withMessage(
       `Password must be at least ${MIN_PASSWORD_LENGTH} characters long, with 1 lowercase letter, 1 uppercase letter, 1 number and 1 symbol`,
     ),
+
+  body('currentPassword')
+    .optional()
+    .isLength({ min: MIN_PASSWORD_LENGTH })
+    .withMessage(`Current Password must be at least ${MIN_PASSWORD_LENGTH} characters long`),
 
   checkForValidationErrors,
 ];
