@@ -7,7 +7,7 @@ import {
   getUserDetails,
 } from '../controllers/user-controller.js';
 import { handleAsync } from '../middleware/handle-async-middleware.js';
-import { validateUpdatePayload } from '../middleware/request-validators/validate-update-payload-middleware.js';
+import { validateUpdatePayload } from '../middleware/request-body-validators/wellformedjson/validate-update-payload-middleware.js';
 
 const userRouter = Router();
 

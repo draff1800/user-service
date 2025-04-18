@@ -9,7 +9,7 @@ export const verifyAuthToken = (req: Request, _res: Response, next: NextFunction
   const authHeaderSubstring = 'Bearer ';
 
   if (!authHeader || !authHeader.startsWith(authHeaderSubstring)) {
-    throw new UnauthorisedError('Authorisation token is missing or malformed');
+    return next(new UnauthorisedError('Authorisation token is missing or malformed'));
   }
 
   const token = authHeader.replace(authHeaderSubstring, '');
@@ -19,6 +19,6 @@ export const verifyAuthToken = (req: Request, _res: Response, next: NextFunction
     req.authTokenContents = tokenContents;
     next();
   } catch {
-    throw new UnauthorisedError('Authorisation token is invalid or expired');
+    next(new UnauthorisedError('Authorisation token is invalid or expired'));
   }
 };

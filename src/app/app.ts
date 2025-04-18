@@ -1,12 +1,12 @@
 import express from 'express';
-import { setupMiddleware } from './setup/setup-middleware.js';
+import { setupBaseMiddleware } from './setup/setup-base-middleware.js';
 import { setupRouters } from './setup/setup-routers.js';
-import { setupErrorHandler } from './setup/setup-error-handler.js';
+import { setupErrorHandling } from './setup/setup-error-handling.js';
 
 const app = express();
 
-setupMiddleware(app);
+setupBaseMiddleware(app);
 setupRouters(app);
-setupErrorHandler(app);
+setupErrorHandling(app);
 
 export default app;

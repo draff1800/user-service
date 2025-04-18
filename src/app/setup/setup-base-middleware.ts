@@ -5,7 +5,7 @@ import cors from 'cors';
 import { envVariables } from '../../config/env-variables.js';
 import morgan from 'morgan';
 
-export const setupMiddleware = (app: express.Application): void => {
+export const setupBaseMiddleware = (app: express.Application): void => {
   app.use(helmet());
   app.use(cors());
   app.use(express.json());
