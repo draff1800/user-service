@@ -4,12 +4,15 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "ts-check": "tsc --noEmit",
+    "clean": "rimraf dist .tsbuildcache",
+    "build": "tsc -p tsconfig.build.json",
     "start-dev": "tsx watch src/server.ts",
-    "build": "tsc",
     "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
-    "precommit": "npm run lint && tsc --noEmit",
+    "lint-fix": "eslint . --fix",
+    "precommit": " npm run ts-check && npm run lint-fix",
     "prepare": "husky"
   },
   "author": "draff1800",
@@ -39,8 +42,10 @@
     "eslint": "^9.19.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "husky": "^9.1.7",
     "prettier": "^3.4.2",
+    "rimraf": "^6.0.1",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.21.0"

@@ -1,0 +1,17 @@
+// For Builds
+
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        // Enable Transpilation
+        "noEmit": false,
+
+        // Transpilation Config
+        "outDir": "dist",
+        "rootDir": "src",
+        "sourceMap": true
+    },
+
+    // Filter
+    "include": ["src/**/*"]
+}
