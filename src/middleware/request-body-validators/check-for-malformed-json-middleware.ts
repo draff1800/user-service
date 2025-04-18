@@ -1,4 +1,5 @@
 import type { NextFunction, Request, Response } from 'express';
+
 import { BadRequestError } from '../../errors/custom-errors/bad-request-error.js';
 import type { JsonSyntaxError } from '../../types/json-syntax-error.js';
 

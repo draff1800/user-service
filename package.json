@@ -12,12 +12,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
-    "precommit": " npm run ts-check && npm run lint-fix",
     "prepare": "husky"
   },
   "author": "draff1800",
   "license": "MIT",
-  "description": "One of three microservices powering the Real Time Collaboration Tool; Manages user registration, authentication and profile management.",
+  "description": "A microservice which handles user registration, authentication and account management.",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
@@ -44,10 +43,15 @@
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "husky": "^9.1.7",
+    "lint-staged": "^15.5.1",
     "prettier": "^3.4.2",
     "rimraf": "^6.0.1",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.21.0"
+  },
+  
+  "lint-staged": {
+    "**/*.{ts,tsx,js}": ["eslint --fix"]
   }
 }

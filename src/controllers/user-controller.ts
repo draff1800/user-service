@@ -1,9 +1,10 @@
-import type { Request, Response, NextFunction } from 'express';
-import type { Info } from '../types/info.js';
-import { getUserById, updateUserById } from '../services/user-service.js';
+import type { NextFunction, Request, Response } from 'express';
+
 import { InternalServerError } from '../errors/custom-errors/internal-server-error.js';
-import type { SerialisedExistingUser } from '../types/serialised-users.js';
+import { getUserById, updateUserById } from '../services/user-service.js';
+import type { Info } from '../types/info.js';
 import type { UpdateCurrentUserDetailsResponse } from '../types/responses/user-responses.js';
+import type { SerialisedExistingUser } from '../types/serialised-users.js';
 import { generateJwtForUser } from '../utils/jwt-utils.js';
 
 const getCurrentUserDetails = async (
@@ -48,4 +49,4 @@ const getUserDetails = (_req: Request, res: Response<Info>, _next: NextFunction)
   res.json({ message: 'Yet to be implemented...' });
 };
 
-export { getCurrentUserDetails, updateCurrentUserDetails, deleteCurrentUser, getUserDetails };
+export { deleteCurrentUser, getCurrentUserDetails, getUserDetails, updateCurrentUserDetails };

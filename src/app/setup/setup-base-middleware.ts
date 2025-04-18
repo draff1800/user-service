@@ -1,9 +1,10 @@
-import express from 'express';
-import { logger } from '../../utils/logger.js';
-import helmet from 'helmet';
 import cors from 'cors';
-import { envVariables } from '../../config/env-variables.js';
+import express from 'express';
+import helmet from 'helmet';
 import morgan from 'morgan';
+
+import { envVariables } from '../../config/env-variables.js';
+import { logger } from '../../utils/logger.js';
 
 export const setupBaseMiddleware = (app: express.Application): void => {
   app.use(helmet());

@@ -1,6 +1,6 @@
+import app from './app/app.js';
 import { envVariables } from './config/env-variables.js';
 import { connectToDb } from './db/connection.js';
-import app from './app/app.js';
 import { logger } from './utils/logger.js';
 
 const PORT = envVariables.serverPort;

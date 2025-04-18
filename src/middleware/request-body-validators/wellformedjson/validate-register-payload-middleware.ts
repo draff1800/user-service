@@ -1,6 +1,7 @@
 import { body } from 'express-validator';
-import { checkForValidationErrors } from './check-for-validation-errors-middleware.js';
+
 import { MIN_PASSWORD_LENGTH } from '../../../config/constants.js';
+import { checkForValidationErrors } from './check-for-validation-errors-middleware.js';
 
 export const validateRegisterPayload = [
   body('username')

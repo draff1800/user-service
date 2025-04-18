@@ -1,4 +1,5 @@
 import { body } from 'express-validator';
+
 import { checkForValidationErrors } from './check-for-validation-errors-middleware.js';
 
 export const validateLoginPayload = [

@@ -1,5 +1,6 @@
-import { envVariables } from '../config/env-variables.js';
 import mongoose from 'mongoose';
+
+import { envVariables } from '../config/env-variables.js';
 import { logger } from '../utils/logger.js';
 
 export const connectToDb = async (): Promise<void> => {

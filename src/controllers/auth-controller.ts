@@ -1,8 +1,9 @@
-import type { Request, Response, NextFunction } from 'express';
+import type { NextFunction, Request, Response } from 'express';
+
 import { InternalServerError } from '../errors/custom-errors/internal-server-error.js';
 import { loginUser, registerUser } from '../services/auth-service.js';
-import type { LoginResponse, VerifyResponse } from '../types/responses/auth-responses.js';
 import type { Info } from '../types/info.js';
+import type { LoginResponse, VerifyResponse } from '../types/responses/auth-responses.js';
 import type { SerialisedNewUser } from '../types/serialised-users.js';
 
 const register = async (req: Request, res: Response<SerialisedNewUser>, _next: NextFunction): Promise<void> => {
@@ -34,4 +35,4 @@ const logout = (_req: Request, res: Response<Info>, _next: NextFunction): void =
   res.status(200).json({ message: 'Logged out' });
 };
 
-export { register, login, verify, logout };
+export { login, logout, register, verify };

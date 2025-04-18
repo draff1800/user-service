@@ -1,4 +1,5 @@
-import { Document, Model, Schema, Types, model } from 'mongoose';
+import { Document, Model, model, Schema, Types } from 'mongoose';
+
 import type { SerialisedExistingUser, SerialisedNewUser } from '../../types/serialised-users.js';
 
 export interface UserDocument extends Document {

@@ -1,10 +1,11 @@
+import bcrypt from 'bcrypt';
+
+import { User, type UserDocument, type UserMethods } from '../db/models/user-model.js';
+import { NotFoundError } from '../errors/custom-errors/not-found-error.js';
 import { UnauthorisedError } from '../errors/custom-errors/unauthorised-error.js';
 import type { UpdatePayload } from '../types/payloads/user-payloads.js';
 import type { SerialisedExistingUser } from '../types/serialised-users.js';
-import bcrypt from 'bcrypt';
 import { saveUserError } from '../utils/mongoose-utils.js';
-import { type UserDocument, type UserMethods, User } from '../db/models/user-model.js';
-import { NotFoundError } from '../errors/custom-errors/not-found-error.js';
 
 const getUserById = async (id: string): Promise<SerialisedExistingUser> => {
   const user = await findUserByIdOrThrow(id);

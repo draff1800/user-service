@@ -1,12 +1,13 @@
-import { User, type UserDocument, type UserMethods } from '../db/models/user-model.js';
-import { logger } from '../utils/logger.js';
-import type { LoginPayload, RegisterPayload } from '../types/payloads/auth-payloads.js';
 import bcrypt from 'bcrypt';
+
+import { User, type UserDocument, type UserMethods } from '../db/models/user-model.js';
 import { UnauthorisedError } from '../errors/custom-errors/unauthorised-error.js';
+import type { LoginPayload, RegisterPayload } from '../types/payloads/auth-payloads.js';
 import type { LoginResponse } from '../types/responses/auth-responses.js';
-import { saveUserError } from '../utils/mongoose-utils.js';
 import type { SerialisedNewUser } from '../types/serialised-users.js';
 import { generateJwtForUser } from '../utils/jwt-utils.js';
+import { logger } from '../utils/logger.js';
+import { saveUserError } from '../utils/mongoose-utils.js';
 
 const registerUser = async (registerPayload: RegisterPayload): Promise<SerialisedNewUser> => {
   const { username, email, password } = registerPayload;
@@ -50,4 +51,4 @@ const loginUser = async (loginPayload: LoginPayload): Promise<LoginResponse> => 
   return { token };
 };
 
-export { registerUser, loginUser };
+export { loginUser, registerUser };
