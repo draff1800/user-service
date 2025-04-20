@@ -27,6 +27,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.5",
     "morgan": "^1.10.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "winston": "^3.17.0"
   },
   "devDependencies": {
@@ -38,6 +40,8 @@
     "@types/mongoose": "^5.11.96",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.10.10",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.8",
     "eslint": "^9.19.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.3",
@@ -50,8 +54,9 @@
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.21.0"
   },
-  
   "lint-staged": {
-    "**/*.{ts,tsx,js}": ["eslint --fix"]
+    "**/*.{ts,tsx,js}": [
+      "eslint --fix"
+    ]
   }
 }

@@ -1,3 +1,5 @@
+export const API_VERSION = 'v1';
+
 export const MIN_PASSWORD_LENGTH = 8;
 
 export const validatorMessages = {
