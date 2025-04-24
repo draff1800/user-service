@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 
-import { envVariables } from '../config/env-variables.js';
+import { envVariables } from '../config/env-variables/env-variables.js';
 import { UnauthorisedError } from '../errors/custom-errors/unauthorised-error.js';
 import type { AuthTokenContents } from '../types/requests/auth-token-contents.js';
 

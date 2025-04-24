@@ -3,7 +3,7 @@ import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 
-import { envVariables } from '../../config/env-variables.js';
+import { envVariables } from '../../config/env-variables/env-variables.js';
 import { logger } from '../../utils/logger.js';
 
 export const setupBaseMiddleware = (app: express.Application): void => {

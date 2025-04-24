@@ -1,9 +1,9 @@
 import app from './app/app.js';
-import { envVariables } from './config/env-variables.js';
+import { envVariables } from './config/env-variables/env-variables.js';
 import { connectToDb } from './db/connection.js';
 import { logger } from './utils/logger.js';
 
-const PORT = envVariables.serverPort;
+const PORT = envVariables.port;
 const NODEENV = envVariables.nodeEnv;
 
 await connectToDb();

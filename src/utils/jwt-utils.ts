@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-import { envVariables } from '../config/env-variables.js';
+import { envVariables } from '../config/env-variables/env-variables.js';
 import type { AuthTokenContents } from '../types/requests/auth-token-contents.js';
 
 export const generateJwtForUser = (userId: string, username: string): string => {
