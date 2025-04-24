@@ -1,0 +1,22 @@
+paths:
+  /users/me:
+    get:
+      summary: Retrieve current user profile
+      tags:
+        - User Profile
+
+    put:
+      summary: Update current user profile
+      tags:
+        - User Profile
+
+    delete:
+      summary: Delete current user profile
+      tags:
+        - User Profile
+
+  /users/by-username/{username}:
+    get:
+      summary: Retrieve specific user profile
+      tags:
+        - User Profile

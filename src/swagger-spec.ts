@@ -1,7 +1,17 @@
+import path from 'path';
 import swaggerJsdoc from 'swagger-jsdoc';
+import yaml from 'yamljs';
 
-import { API_VERSION } from '../config/constants.js';
-import { envVariables } from '../config/env-variables/env-variables.js';
+import { API_VERSION } from './config/constants.js';
+import { envVariables } from './config/env-variables/env-variables.js';
+
+const authPaths = yaml.load(path.resolve('swagger-docs/auth.yaml')).paths;
+const userPaths = yaml.load(path.resolve('swagger-docs/user.yaml')).paths;
+
+const paths = {
+  ...authPaths,
+  ...userPaths,
+};
 
 const swaggerDefinition = {
   openapi: '3.0.0',
@@ -16,6 +26,7 @@ const swaggerDefinition = {
       description: 'Local',
     },
   ],
+  paths,
 };
 
 const swaggerOptions = {

@@ -11,16 +11,16 @@ A microservice which handles user registration, authentication and account manag
 |-------|-------------
 | <kbd>POST /v1/auth/register</kbd> | Register a new user
 | <kbd>POST /v1/auth/login</kbd> | Authenticate and generate a JWT token
-| <kbd>POST /v1/auth/verify</kbd> | Verify whether a JWT token is valid
+| <kbd>POST /v1/auth/verify</kbd> | Verify a JWT token and get its contents
 | <kbd>POST /v1/auth/logout</kbd> | Return a logout notification
 
 #### User Profile
 | Route | Description                                          
 |-------|-------------
-| <kbd>GET /v1/users/me</kbd> | Retrieve current user's profile
-| <kbd>PUT /v1/users/me</kbd> | Update current user's profile
-| <kbd>DELETE /v1/users/me</kbd> | Delete current user's profile
-| <kbd>GET /v1/users/by-username/:username</kbd> | Retrieve specific user's profile
+| <kbd>GET /v1/users/me</kbd> | Retrieve current user profile
+| <kbd>PUT /v1/users/me</kbd> | Update current user profile
+| <kbd>DELETE /v1/users/me</kbd> | Delete current user profile
+| <kbd>GET /v1/users/by-username/:username</kbd> | Retrieve specific user profile
 
 #### Documentation
 (Only available in development environment)
