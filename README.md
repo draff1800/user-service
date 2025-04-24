@@ -11,7 +11,7 @@ A microservice which handles user registration, authentication and account manag
 |-------|-------------
 | <kbd>POST /v1/auth/register</kbd> | Register a new user
 | <kbd>POST /v1/auth/login</kbd> | Authenticate and generate a JWT token
-| <kbd>POST /v1/auth/verify</kbd> | Verify a JWT token and get its contents
+| <kbd>POST /v1/auth/verify</kbd> | Verify a JWT token and get contents
 | <kbd>POST /v1/auth/logout</kbd> | Return a logout notification
 
 #### User Profile

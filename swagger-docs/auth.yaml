@@ -13,7 +13,7 @@ paths:
 
   /auth/verify:
     post:
-      summary: Verify a JWT token and get its contents
+      summary: Verify a JWT token and get contents
       tags:
         - Authentication
 
