@@ -1,6 +1,7 @@
 import swaggerJsdoc from 'swagger-jsdoc';
 
 import { API_VERSION } from '../config/constants.js';
+import { envVariables } from '../config/env-variables/env-variables.js';
 
 const swaggerDefinition = {
   openapi: '3.0.0',
@@ -11,7 +12,7 @@ const swaggerDefinition = {
   },
   servers: [
     {
-      url: `http://localhost:3000/${API_VERSION}`,
+      url: `http://localhost:${envVariables.port}/${API_VERSION}`,
       description: 'Local',
     },
   ],

@@ -22,6 +22,12 @@ A microservice which handles user registration, authentication and account manag
 | <kbd>DELETE /v1/users/me</kbd> | Delete current user's profile
 | <kbd>GET /v1/users/by-username/:username</kbd> | Retrieve specific user's profile
 
+#### Documentation
+(Only available in development environment)
+| Route | Description                                          
+|-------|-------------
+| <kbd>GET /v1/docs</kbd> | Serves a web-page with API documentation
+
 ---
 
 ### Setup
