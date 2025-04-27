@@ -1,0 +1,14 @@
+summary: Delete current user profile
+tags:
+  - User Profile
+security:
+  - bearerAuth: []
+responses:
+  '200':
+    description: User profile deleted
+    content:
+      application/json:
+        schema:
+          $ref: '../../../components/schemas/info.yaml#/Info'
+        example: 
+          message: "User deleted"

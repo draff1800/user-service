@@ -1,0 +1,264 @@
+openapi: 3.0.0
+info:
+  title: User Service
+  version: 1.0.0
+  description: Documentation for the User Service API
+servers:
+  - url: 'http://localhost:3000/v1'
+paths:
+  /auth/register:
+    post:
+      summary: Register a new user
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - email
+                - password
+              properties:
+                username:
+                  type: string
+                  example: user1
+                email:
+                  type: string
+                  format: email
+                  example: user1@gmail.com
+                password:
+                  type: string
+                  format: password
+                  example: Password1!
+      responses:
+        '201':
+          description: Registered new user
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - username
+                  - email
+                  - createdDateTime
+                properties:
+                  username:
+                    type: string
+                    example: user1
+                  email:
+                    type: string
+                    format: email
+                    example: email1@gmail.com
+                  createdDateTime:
+                    type: string
+                    format: date-time
+                    example: '2025-04-27T09:19:32.794Z'
+  /auth/login:
+    post:
+      summary: Authenticate and generate a JSON Web Token (JWT)
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: user1@gmail.com
+                password:
+                  type: string
+                  format: password
+                  example: Password1!
+      responses:
+        '200':
+          description: Authenticated user and generated JWT
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - token
+                properties:
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5c...
+  /auth/verify:
+    post:
+      security:
+        - bearerAuth: []
+      summary: Verify a JWT and get contents
+      tags:
+        - Authentication
+      responses:
+        '200':
+          description: Verified JWT and returned contents
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - id
+                  - username
+                properties:
+                  id:
+                    type: string
+                    example: 680df6a496e239b4efd05891
+                  username:
+                    type: string
+                    format: string
+                    example: user1
+  /auth/logout:
+    post:
+      summary: Return a logout notification
+      tags:
+        - Authentication
+      responses:
+        '200':
+          description: Returned logout notification
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1users~1me/delete/responses/200/content/application~1json/schema'
+              example:
+                message: Logged out
+  /users/me:
+    get:
+      security:
+        - bearerAuth: []
+      summary: Retrieve current user profile
+      tags:
+        - User Profile
+      responses:
+        '200':
+          description: User profile retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - username
+                  - email
+                  - createdDateTime
+                  - updatedDateTime
+                properties:
+                  username:
+                    type: string
+                    example: user1
+                  email:
+                    type: string
+                    format: email
+                    example: email1@gmail.com
+                  createdDateTime:
+                    type: string
+                    format: date-time
+                    example: '2025-04-27T09:19:32.794Z'
+                  updatedDateTime:
+                    type: string
+                    format: date-time
+                    example: '2025-04-27T09:19:32.794Z'
+    put:
+      security:
+        - bearerAuth: []
+      summary: Update current user profile
+      tags:
+        - User Profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                newUsername:
+                  type: string
+                  description: Optional new username
+                  example: user1b
+                newEmail:
+                  type: string
+                  format: email
+                  description: Optional new email
+                  example: user1b@gmail.com
+                newPassword:
+                  type: string
+                  format: password
+                  description: Optional new password
+                  example: Password1b!
+                currentPassword:
+                  type: string
+                  format: password
+                  description: Current password. Required if updating password
+                  example: Password1!
+      responses:
+        '200':
+          description: User profile updated
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - user
+                properties:
+                  user:
+                    $ref: '#/paths/~1users~1me/get/responses/200/content/application~1json/schema'
+                  token:
+                    type: string
+                    description: Returned if username is updated
+                    example: eyJhbGciOiJIUzI1NiIsInR5c...
+    delete:
+      security:
+        - bearerAuth: []
+      summary: Delete current user profile
+      tags:
+        - User Profile
+      responses:
+        '200':
+          description: User profile deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    example: Message
+              example:
+                message: User deleted
+  '/users/by-username/{username}':
+    get:
+      security:
+        - bearerAuth: []
+      summary: Retrieve specific user profile
+      tags:
+        - User Profile
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Username of the user profile to retrieve
+      responses:
+        '200':
+          description: User profile retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1users~1me/get/responses/200/content/application~1json/schema'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

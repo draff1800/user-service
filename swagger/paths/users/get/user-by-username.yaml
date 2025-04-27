@@ -1,0 +1,17 @@
+summary: Retrieve specific user profile
+tags:
+  - User Profile
+parameters:
+  - name: username
+    in: path
+    required: true
+    schema:
+      type: string
+    description: Username of the user profile to retrieve
+responses:
+  '200':
+    description: User profile retrieved
+    content:
+      application/json:
+        schema:
+          $ref: '../../../components/schemas/serialised-existing-user.yaml#/SerialisedExistingUser'

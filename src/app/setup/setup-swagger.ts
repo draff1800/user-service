@@ -1,9 +1,12 @@
 import express from 'express';
+import path from 'path';
 import swaggerUi from 'swagger-ui-express';
+import yaml from 'yamljs';
 
 import { API_VERSION } from '../../config/constants.js';
-import { swaggerSpec } from '../../swagger-spec.js';
 
 export const setupSwagger = (app: express.Application): void => {
-  app.use(`/${API_VERSION}/docs`, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  const swaggerBundle = yaml.load(path.resolve('swagger/bundle.yaml'));
+
+  app.use(`/${API_VERSION}/docs`, swaggerUi.serve, swaggerUi.setup(swaggerBundle));
 };

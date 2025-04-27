@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  title: User Service
+  version: 1.0.0
+  description: Documentation for the User Service API
+servers:
+  - url: http://localhost:3000/v1
+
+# ---
+
+paths:
+  /auth/register:
+    post:
+      $ref: './paths/auth/post/register.yaml'
+  /auth/login:
+    post:
+      $ref: './paths/auth/post/login.yaml'
+  /auth/verify:
+    post:
+      $ref: './paths/auth/post/verify.yaml'
+      security:
+        - bearerAuth: []
+  /auth/logout:
+    post:
+      $ref: './paths/auth/post/logout.yaml'
+
+  /users/me:
+    get:
+      $ref: './paths/users/get/me.yaml'
+      security:
+        - bearerAuth: []
+    put:
+      $ref: './paths/users/put/me.yaml'
+      security:
+        - bearerAuth: []
+    delete:
+      $ref: './paths/users/delete/me.yaml'
+      security:
+        - bearerAuth: []
+  /users/by-username/{username}:
+    get:
+      $ref: './paths/users/get/user-by-username.yaml'
+      security:
+        - bearerAuth: []
+
+# ===
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

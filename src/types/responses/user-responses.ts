@@ -1,6 +1,6 @@
 import type { SerialisedExistingUser } from '../serialised-users.js';
 
-export interface UpdateCurrentUserDetailsResponse {
+export interface UpdateCurrentUserResponse {
   user: SerialisedExistingUser;
   token?: string;
 }

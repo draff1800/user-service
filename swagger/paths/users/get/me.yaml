@@ -1,0 +1,12 @@
+summary: Retrieve current user profile
+tags:
+  - User Profile
+security:
+  - bearerAuth: []
+responses:
+  '200':
+    description: User profile retrieved
+    content:
+      application/json:
+        schema:
+          $ref: '../../../components/schemas/serialised-existing-user.yaml#/SerialisedExistingUser'

@@ -1,0 +1,18 @@
+RegisterBody:
+  type: object
+  required:
+    - username
+    - email
+    - password
+  properties:
+    username:
+      type: string
+      example: "user1"
+    email:
+      type: string
+      format: email
+      example: "user1@gmail.com"
+    password:
+      type: string
+      format: password
+      example: "Password1!"

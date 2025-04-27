@@ -1,0 +1,11 @@
+UpdateCurrentUserResponse:
+  type: object
+  required:
+    - user
+  properties:
+    user:
+      $ref: './serialised-existing-user.yaml#/SerialisedExistingUser'
+    token:
+      type: string
+      description: Returned if username is updated
+      example: "eyJhbGciOiJIUzI1NiIsInR5c..."

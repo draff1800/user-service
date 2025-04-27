@@ -1,0 +1,16 @@
+summary: Authenticate and generate a JSON Web Token (JWT)
+tags:
+  - Authentication
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../../../components/schemas/login-body.yaml#/LoginBody'
+responses:
+  '200':
+    description: Authenticated user and generated JWT
+    content:
+      application/json:
+        schema:
+          $ref: '../../../components/schemas/login-response.yaml#/LoginResponse'

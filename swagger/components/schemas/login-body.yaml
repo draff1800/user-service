@@ -1,0 +1,14 @@
+LoginBody:
+  type: object
+  required:
+    - email
+    - password
+  properties:
+    email:
+      type: string
+      format: email
+      example: "user1@gmail.com"
+    password:
+      type: string
+      format: password
+      example: "Password1!"

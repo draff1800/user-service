@@ -26,10 +26,8 @@ const verify = async (req: Request, res: Response<VerifyResponse>, _next: NextFu
   await verifyUser(userId);
 
   const verifyResponse = {
-    user: {
-      id: req.authTokenContents.sub,
-      username: req.authTokenContents.username,
-    },
+    id: req.authTokenContents.sub,
+    username: req.authTokenContents.username,
   };
 
   res.status(200).json(verifyResponse);

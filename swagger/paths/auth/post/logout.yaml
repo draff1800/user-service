@@ -1,0 +1,12 @@
+summary: Return a logout notification
+tags:
+  - Authentication
+responses:
+  '200':
+    description: Returned logout notification
+    content:
+      application/json:
+        schema:
+          $ref: '../../../components/schemas/info.yaml#/Info'
+        example: 
+          message: "Logged out"

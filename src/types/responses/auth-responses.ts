@@ -3,8 +3,6 @@ export interface LoginResponse {
 }
 
 export interface VerifyResponse {
-  user: {
-    id: string;
-    username: string;
-  };
+  id: string;
+  username: string;
 }

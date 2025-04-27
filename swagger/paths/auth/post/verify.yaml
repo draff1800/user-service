@@ -1,0 +1,12 @@
+summary: Verify a JWT and get contents
+tags:
+  - Authentication
+security:
+  - bearerAuth: []
+responses:
+  '200':
+    description: Verified JWT and returned contents
+    content:
+      application/json:
+        schema:
+          $ref: '../../../components/schemas/verify-response.yaml#/VerifyResponse'

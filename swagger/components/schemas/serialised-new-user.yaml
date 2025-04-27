@@ -1,0 +1,18 @@
+SerialisedNewUser:
+  type: object
+  required:
+    - username
+    - email
+    - createdDateTime
+  properties:
+    username:
+      type: string
+      example: "user1"
+    email:
+      type: string
+      format: email
+      example: "email1@gmail.com"
+    createdDateTime:
+      type: string
+      format: date-time
+      example: "2025-04-27T09:19:32.794Z"

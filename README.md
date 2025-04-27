@@ -10,8 +10,8 @@ A microservice which handles user registration, authentication and account manag
 | Route | Description                                          
 |-------|-------------
 | <kbd>POST /v1/auth/register</kbd> | Register a new user
-| <kbd>POST /v1/auth/login</kbd> | Authenticate and generate a JWT token
-| <kbd>POST /v1/auth/verify</kbd> | Verify a JWT token and get contents
+| <kbd>POST /v1/auth/login</kbd> | Authenticate and generate a JSON Web Token (JWT)
+| <kbd>POST /v1/auth/verify</kbd> | Verify a JWT and get contents
 | <kbd>POST /v1/auth/logout</kbd> | Return a logout notification
 
 #### User Profile

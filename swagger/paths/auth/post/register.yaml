@@ -1,0 +1,16 @@
+summary: Register a new user
+tags:
+  - Authentication
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../../../components/schemas/register-body.yaml#/RegisterBody'
+responses:
+  '201':
+    description: Registered new user
+    content:
+      application/json:
+        schema:
+          $ref: '../../../components/schemas/serialised-new-user.yaml#/SerialisedNewUser'

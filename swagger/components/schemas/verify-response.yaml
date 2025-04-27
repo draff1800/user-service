@@ -1,0 +1,13 @@
+VerifyResponse:
+  type: object
+  required:
+    - id
+    - username
+  properties:
+    id:
+      type: string
+      example: "680df6a496e239b4efd05891"
+    username:
+      type: string
+      format: string
+      example: "user1"

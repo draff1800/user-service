@@ -1,0 +1,22 @@
+UpdateBody:
+  type: object
+  properties:
+    newUsername:
+      type: string
+      description: Optional new username
+      example: "user1b"
+    newEmail:
+      type: string
+      format: email
+      description: Optional new email
+      example: "user1b@gmail.com"
+    newPassword:
+      type: string
+      format: password
+      description: Optional new password
+      example: "Password1b!"
+    currentPassword:
+      type: string
+      format: password
+      description: Current password. Required if updating password
+      example: "Password1!"

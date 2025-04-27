@@ -1,0 +1,18 @@
+summary: Update current user profile
+tags:
+  - User Profile
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../../../components/schemas/update-body.yaml#/UpdateBody'
+responses:
+  '200':
+    description: User profile updated
+    content:
+      application/json:
+        schema:
+          $ref: '../../../components/schemas/update-current-user-response.yaml#/UpdateCurrentUserResponse'
