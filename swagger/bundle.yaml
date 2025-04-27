@@ -58,7 +58,7 @@ paths:
                     example: '2025-04-27T09:19:32.794Z'
   /auth/login:
     post:
-      summary: Authenticate and generate a JSON Web Token (JWT)
+      summary: Authenticate and return a JSON Web Token (JWT)
       tags:
         - Authentication
       requestBody:
@@ -81,7 +81,7 @@ paths:
                   example: Password1!
       responses:
         '200':
-          description: Authenticated user and generated JWT
+          description: Authenticated user and returned JWT
           content:
             application/json:
               schema:
