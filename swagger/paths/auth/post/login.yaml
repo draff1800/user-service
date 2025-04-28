@@ -14,3 +14,23 @@ responses:
       application/json:
         schema:
           $ref: '../../../components/schemas/login-response.yaml#/LoginResponse'
+  '400':
+    description: Bad request
+    content:
+      application/json:
+        schema: 
+          oneOf:
+            - $ref: '../../../components/schemas/info.yaml#/Info'
+            - $ref: '../../../components/schemas/multi-error.yaml#/MultiError'
+        examples:
+          malformedJson:
+            summary: Malformed JSON
+            value: 
+              message: "Malformed JSON in request body"
+          invalidData:
+            summary: Invalid data
+            value: 
+              message: "Invalid data"
+              errors:
+                - "Email must be a valid email"
+                - "Password must not be empty"

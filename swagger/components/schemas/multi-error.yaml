@@ -1,0 +1,15 @@
+MultiError:
+  type: object
+  required:
+    - message
+    - errors
+  properties:
+    message:
+      type: string
+      example: "Invalid data"
+    errors:
+      type: array
+      description: List of validation error messages
+      items:
+        type: string
+        example: "Email must be a valid email"

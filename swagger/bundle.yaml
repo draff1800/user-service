@@ -56,6 +56,26 @@ paths:
                     type: string
                     format: date-time
                     example: '2025-04-27T09:19:32.794Z'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/paths/~1users~1me/get/responses/400/content/application~1json/schema'
+                  - $ref: '#/paths/~1auth~1login/post/responses/400/content/application~1json/schema/oneOf/1'
+              examples:
+                malformedJson:
+                  summary: Malformed JSON
+                  value:
+                    message: Malformed JSON in request body
+                invalidData:
+                  summary: Invalid data
+                  value:
+                    message: Invalid data
+                    errors:
+                      - Email must be a valid email
+                      - 'Password must be at least 8 characters long, with 1 lowercase letter, 1 uppercase letter, 1 number and 1 symbol'
   /auth/login:
     post:
       summary: Authenticate and return a JSON Web Token (JWT)
@@ -92,6 +112,39 @@ paths:
                   token:
                     type: string
                     example: eyJhbGciOiJIUzI1NiIsInR5c...
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/paths/~1users~1me/get/responses/400/content/application~1json/schema'
+                  - type: object
+                    required:
+                      - message
+                      - errors
+                    properties:
+                      message:
+                        type: string
+                        example: Invalid data
+                      errors:
+                        type: array
+                        description: List of validation error messages
+                        items:
+                          type: string
+                          example: Email must be a valid email
+              examples:
+                malformedJson:
+                  summary: Malformed JSON
+                  value:
+                    message: Malformed JSON in request body
+                invalidData:
+                  summary: Invalid data
+                  value:
+                    message: Invalid data
+                    errors:
+                      - Email must be a valid email
+                      - Password must not be empty
   /auth/verify:
     post:
       security:
@@ -117,6 +170,17 @@ paths:
                     type: string
                     format: string
                     example: user1
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1users~1me/get/responses/400/content/application~1json/schema'
+              examples:
+                malformedJson:
+                  summary: Malformed JSON
+                  value:
+                    message: Malformed JSON in request body
   /auth/logout:
     post:
       summary: Return a logout notification
@@ -128,9 +192,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/paths/~1users~1me/delete/responses/200/content/application~1json/schema'
+                $ref: '#/paths/~1users~1me/get/responses/400/content/application~1json/schema'
               example:
                 message: Logged out
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1users~1me/get/responses/400/content/application~1json/schema'
+              examples:
+                malformedJson:
+                  summary: Malformed JSON
+                  value:
+                    message: Malformed JSON in request body
   /users/me:
     get:
       security:
@@ -166,6 +241,23 @@ paths:
                     type: string
                     format: date-time
                     example: '2025-04-27T09:19:32.794Z'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    example: Message
+              examples:
+                malformedJson:
+                  summary: Malformed JSON
+                  value:
+                    message: Malformed JSON in request body
     put:
       security:
         - bearerAuth: []
@@ -214,6 +306,17 @@ paths:
                     type: string
                     description: Returned if username is updated
                     example: eyJhbGciOiJIUzI1NiIsInR5c...
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1users~1me/get/responses/400/content/application~1json/schema'
+              examples:
+                malformedJson:
+                  summary: Malformed JSON
+                  value:
+                    message: Malformed JSON in request body
     delete:
       security:
         - bearerAuth: []
@@ -226,15 +329,20 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - message
-                properties:
-                  message:
-                    type: string
-                    example: Message
+                $ref: '#/paths/~1users~1me/get/responses/400/content/application~1json/schema'
               example:
                 message: User deleted
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1users~1me/get/responses/400/content/application~1json/schema'
+              examples:
+                malformedJson:
+                  summary: Malformed JSON
+                  value:
+                    message: Malformed JSON in request body
   '/users/by-username/{username}':
     get:
       security:
@@ -256,6 +364,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/paths/~1users~1me/get/responses/200/content/application~1json/schema'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1users~1me/get/responses/400/content/application~1json/schema'
+              examples:
+                malformedJson:
+                  summary: Malformed JSON
+                  value:
+                    message: Malformed JSON in request body
 components:
   securitySchemes:
     bearerAuth:

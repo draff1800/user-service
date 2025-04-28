@@ -15,3 +15,14 @@ responses:
       application/json:
         schema:
           $ref: '../../../components/schemas/serialised-existing-user.yaml#/SerialisedExistingUser'
+  '400':
+    description: Bad request
+    content:
+      application/json:
+        schema:
+          $ref: '../../../components/schemas/info.yaml#/Info'
+        examples:
+          malformedJson:
+            summary: Malformed JSON
+            value: 
+              message: "Malformed JSON in request body"

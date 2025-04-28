@@ -8,7 +8,7 @@ export const checkForValidationErrors = (req: Request, _res: Response, next: Nex
 
   if (!validationErrors.isEmpty()) {
     const errorStrings = validationErrors.array().map((error) => error.msg);
-    return next(new ValidateRequestError('Invalid payload', errorStrings));
+    return next(new ValidateRequestError('Invalid data', errorStrings));
   }
 
   next();

@@ -14,3 +14,23 @@ responses:
       application/json:
         schema:
           $ref: '../../../components/schemas/serialised-new-user.yaml#/SerialisedNewUser'
+  '400':
+    description: Bad request
+    content:
+      application/json:
+        schema: 
+          oneOf:
+            - $ref: '../../../components/schemas/info.yaml#/Info'
+            - $ref: '../../../components/schemas/multi-error.yaml#/MultiError'
+        examples:
+          malformedJson:
+            summary: Malformed JSON
+            value: 
+              message: "Malformed JSON in request body"
+          invalidData:
+            summary: Invalid data
+            value: 
+              message: "Invalid data"
+              errors:
+                - "Email must be a valid email"
+                - "Password must be at least 8 characters long, with 1 lowercase letter, 1 uppercase letter, 1 number and 1 symbol"
