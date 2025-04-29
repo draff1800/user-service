@@ -76,6 +76,10 @@ paths:
                     errors:
                       - Email must be a valid email
                       - 'Password must be at least 8 characters long, with 1 lowercase letter, 1 uppercase letter, 1 number and 1 symbol'
+                usernameAlreadyTaken:
+                  summary: Username already taken
+                  value:
+                    message: Username is already taken
   /auth/login:
     post:
       summary: Authenticate and return a JSON Web Token (JWT)
@@ -145,6 +149,22 @@ paths:
                     errors:
                       - Email must be a valid email
                       - Password must not be empty
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1users~1me/get/responses/400/content/application~1json/schema'
+              example:
+                message: Invalid credentials
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1users~1me/get/responses/400/content/application~1json/schema'
+              example:
+                message: Couldn't get User - Unexpected error occurred
   /auth/verify:
     post:
       security:
@@ -181,6 +201,10 @@ paths:
                   summary: Malformed JSON
                   value:
                     message: Malformed JSON in request body
+                malformedUserId:
+                  summary: Malformed User ID
+                  value:
+                    message: Couldn't get User - Malformed ID
         '401':
           description: Unauthorized
           content:
@@ -196,6 +220,22 @@ paths:
                   summary: Invalid or expired token
                   value:
                     message: Authorisation token is invalid or expired
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1users~1me/get/responses/400/content/application~1json/schema'
+              example:
+                message: User not found
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1users~1me/get/responses/400/content/application~1json/schema'
+              example:
+                message: Unexpected authorisation error occurred
   /auth/logout:
     post:
       summary: Return a logout notification
@@ -216,11 +256,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/paths/~1users~1me/get/responses/400/content/application~1json/schema'
-              examples:
-                malformedJson:
-                  summary: Malformed JSON
-                  value:
-                    message: Malformed JSON in request body
+              example:
+                message: Malformed JSON in request body
   /users/me:
     get:
       security:

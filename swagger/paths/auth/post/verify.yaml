@@ -21,6 +21,10 @@ responses:
             summary: Malformed JSON
             value: 
               message: "Malformed JSON in request body"
+          malformedUserId:
+            summary: Malformed User ID
+            value:
+              message: "Couldn't get User - Malformed ID"
   '401':
     description: Unauthorized
     content:
@@ -36,3 +40,19 @@ responses:
             summary: Invalid or expired token
             value: 
               message: "Authorisation token is invalid or expired"
+  '404':
+    description: Not found
+    content:
+      application/json:
+        schema:
+          $ref: '../../../components/schemas/info.yaml#/Info'
+        example:
+          message: "User not found"
+  '500':
+    description: Internal server error
+    content:
+      application/json:
+        schema:
+          $ref: '../../../components/schemas/info.yaml#/Info'
+        example:
+          message: "Unexpected authorisation error occurred"

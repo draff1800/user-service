@@ -34,3 +34,7 @@ responses:
               errors:
                 - "Email must be a valid email"
                 - "Password must be at least 8 characters long, with 1 lowercase letter, 1 uppercase letter, 1 number and 1 symbol"
+          usernameAlreadyTaken:
+            summary: Username already taken
+            value: 
+              message: "Username is already taken"

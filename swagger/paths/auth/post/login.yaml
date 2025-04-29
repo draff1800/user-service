@@ -34,3 +34,19 @@ responses:
               errors:
                 - "Email must be a valid email"
                 - "Password must not be empty"
+  '401':
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          $ref: '../../../components/schemas/info.yaml#/Info'
+        example: 
+          message: "Invalid credentials"
+  '500':
+    description: Internal server error
+    content:
+      application/json:
+        schema:
+          $ref: '../../../components/schemas/info.yaml#/Info'
+        example: 
+          message: "Couldn't get User - Unexpected error occurred"
