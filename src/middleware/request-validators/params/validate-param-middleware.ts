@@ -12,7 +12,7 @@ export const validateParam = (name: string, options?: ValidateParamOptions): Req
   const {
     required = true,
     maxLength,
-    regex = /^[a-zA-Z0-9_-]+$/,
+    regex = /^([a-zA-Z0-9_-]+)?$/,
     regexMessage = `${capitalisedName} has invalid characters`,
   } = options ?? {};
 

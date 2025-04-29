@@ -23,7 +23,7 @@ export const validateUpdateBody = [
       minSymbols: 1,
     })
     .withMessage(
-      `Password must be at least ${MIN_PASSWORD_LENGTH} characters long, with 1 lowercase letter, 1 uppercase letter, 1 number and 1 symbol`,
+      `New Password must be at least ${MIN_PASSWORD_LENGTH} characters long, with 1 lowercase letter, 1 uppercase letter, 1 number and 1 symbol`,
     ),
 
   body('currentPassword')

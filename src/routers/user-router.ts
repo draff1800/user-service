@@ -13,6 +13,6 @@ userRouter.use(verifyAuthToken);
 userRouter.get('/me', handleAsync(getCurrentUser));
 userRouter.put('/me', validateUpdateBody, handleAsync(updateCurrentUser));
 userRouter.delete('/me', handleAsync(deleteCurrentUser));
-userRouter.get('/by-username/:username', validateParam('username'), handleAsync(getUser));
+userRouter.get('/by-username/:username?', validateParam('username'), handleAsync(getUser));
 
 export { userRouter };
