@@ -181,6 +181,21 @@ paths:
                   summary: Malformed JSON
                   value:
                     message: Malformed JSON in request body
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1users~1me/get/responses/400/content/application~1json/schema'
+              examples:
+                missingOrMalformedToken:
+                  summary: Missing or malformed token
+                  value:
+                    message: Authorisation token is missing or malformed
+                invalidOrExpiredToken:
+                  summary: Invalid or expired token
+                  value:
+                    message: Authorisation token is invalid or expired
   /auth/logout:
     post:
       summary: Return a logout notification
@@ -258,6 +273,21 @@ paths:
                   summary: Malformed JSON
                   value:
                     message: Malformed JSON in request body
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1users~1me/get/responses/400/content/application~1json/schema'
+              examples:
+                missingOrMalformedToken:
+                  summary: Missing or malformed token
+                  value:
+                    message: Authorisation token is missing or malformed
+                invalidOrExpiredToken:
+                  summary: Invalid or expired token
+                  value:
+                    message: Authorisation token is invalid or expired
     put:
       security:
         - bearerAuth: []
@@ -317,6 +347,21 @@ paths:
                   summary: Malformed JSON
                   value:
                     message: Malformed JSON in request body
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1users~1me/get/responses/400/content/application~1json/schema'
+              examples:
+                missingOrMalformedToken:
+                  summary: Missing or malformed token
+                  value:
+                    message: Authorisation token is missing or malformed
+                invalidOrExpiredToken:
+                  summary: Invalid or expired token
+                  value:
+                    message: Authorisation token is invalid or expired
     delete:
       security:
         - bearerAuth: []
@@ -343,6 +388,21 @@ paths:
                   summary: Malformed JSON
                   value:
                     message: Malformed JSON in request body
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1users~1me/get/responses/400/content/application~1json/schema'
+              examples:
+                missingOrMalformedToken:
+                  summary: Missing or malformed token
+                  value:
+                    message: Authorisation token is missing or malformed
+                invalidOrExpiredToken:
+                  summary: Invalid or expired token
+                  value:
+                    message: Authorisation token is invalid or expired
   '/users/by-username/{username}':
     get:
       security:
@@ -375,6 +435,21 @@ paths:
                   summary: Malformed JSON
                   value:
                     message: Malformed JSON in request body
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1users~1me/get/responses/400/content/application~1json/schema'
+              examples:
+                missingOrMalformedToken:
+                  summary: Missing or malformed token
+                  value:
+                    message: Authorisation token is missing or malformed
+                invalidOrExpiredToken:
+                  summary: Invalid or expired token
+                  value:
+                    message: Authorisation token is invalid or expired
 components:
   securitySchemes:
     bearerAuth:
