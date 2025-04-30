@@ -7,13 +7,13 @@
     "ts-check": "tsc --noEmit",
     "clean": "rimraf dist .tsbuildcache",
     "build": "tsc -p tsconfig.build.json",
-    "start-dev": "tsx watch src/server.ts",
+    "bundle-swagger": "swagger-cli bundle swagger/index.yaml --outfile swagger/bundle.yaml --type yaml",
+    "start-dev": "npm run bundle-swagger && tsx watch src/server.ts",
     "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
-    "prepare": "husky",
-    "swagger-bundle": "swagger-cli bundle swagger/index.yaml --outfile swagger/bundle.yaml --type yaml"
+    "prepare": "husky"
   },
   "author": "draff1800",
   "license": "MIT",

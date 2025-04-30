@@ -29,7 +29,7 @@ const updateUserById = async (id: string, updateBody: UpdateBody): Promise<Seria
   try {
     await user.save();
   } catch (err) {
-    throw saveUserError(err, `Couldn't update user. Please try again later`);
+    throw saveUserError(err, `Couldn't update User. Please try again later`);
   }
 
   return user.serialiseExistingUser();

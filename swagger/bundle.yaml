@@ -478,7 +478,7 @@ paths:
                 unexpectedUpdateError:
                   summary: Unexpected update error
                   value:
-                    message: Couldn't update user. Please try again later
+                    message: Couldn't update User. Please try again later
     delete:
       security:
         - bearerAuth: []

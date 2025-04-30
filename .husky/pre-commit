@@ -1,2 +1,2 @@
 npx lint-staged && npm run ts-check
-npm run swagger-bundle && git add swagger/bundle.yaml
+npm run bundle-swagger && git add swagger/bundle.yaml
