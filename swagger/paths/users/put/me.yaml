@@ -34,6 +34,14 @@ responses:
               errors:
                 - "Email must be a valid email"
                 - "New Password must be at least 8 characters long, with 1 lowercase letter, 1 uppercase letter, 1 number and 1 symbol"
+          malformedUserId:
+            summary: Malformed User ID
+            value:
+              message: "Couldn't get User - Malformed ID"
+          usernameAlreadyTaken:
+            summary: Username already taken
+            value: 
+              message: "Username is already taken"
   '401':
     description: Unauthorized
     content:
@@ -49,3 +57,34 @@ responses:
             summary: Invalid or expired token
             value: 
               message: "Authorisation token is invalid or expired"
+          invalidCurrentPassword:
+            summary: Invalid current password
+            value:
+              message: "Invalid Current Password"
+  '404':
+    description: Not found
+    content:
+      application/json:
+        schema:
+          $ref: '../../../components/schemas/info.yaml#/Info'
+        example:
+          message: "User not found"
+  '500':
+    description: Internal server error
+    content:
+      application/json:
+        schema:
+          $ref: '../../../components/schemas/info.yaml#/Info'
+        examples:
+          unexpectedAuthorizationError:
+            summary: "Unexpected authorization error"
+            value:
+              message: "Unexpected authorisation error occurred"
+          unexpectedGetError:
+            summary: "Unexpected get error"
+            value:
+              message: "Couldn't get User - Unexpected error occurred"
+          unexpectedUpdateError:
+            summary: "Unexpected update error"
+            value:
+              message: "Couldn't update user. Please try again later"

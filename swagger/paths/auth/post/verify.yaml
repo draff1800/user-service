@@ -54,5 +54,12 @@ responses:
       application/json:
         schema:
           $ref: '../../../components/schemas/info.yaml#/Info'
-        example:
-          message: "Unexpected authorisation error occurred"
+        examples:
+          unexpectedAuthorizationError:
+            summary: "Unexpected authorization error"
+            value:
+              message: "Unexpected authorisation error occurred"
+          unexpectedGetError:
+            summary: "Unexpected get error"
+            value:
+              message: "Couldn't get User - Unexpected error occurred"

@@ -48,3 +48,26 @@ responses:
             summary: Invalid or expired token
             value: 
               message: "Authorisation token is invalid or expired"
+  '404':
+    description: Not found
+    content:
+      application/json:
+        schema:
+          $ref: '../../../components/schemas/info.yaml#/Info'
+        example:
+          message: "User not found"
+  '500':
+    description: Internal server error
+    content:
+      application/json:
+        schema:
+          $ref: '../../../components/schemas/info.yaml#/Info'
+        examples:
+          unexpectedUsernameError:
+            summary: "Unexpected username error"
+            value:
+              message: "Unexpected error occurred when reading username"
+          unexpectedGetError:
+            summary: "Unexpected get error"
+            value:
+              message: "Couldn't get User - Unexpected error occurred"
