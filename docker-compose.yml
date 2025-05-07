@@ -4,6 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.local
+    image: user-service:dev-local
     ports:
       - "3000:3000"
     env_file:

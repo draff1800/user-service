@@ -89,6 +89,7 @@ A microservice which handles user registration, authentication and account manag
     - Production mode (compiles to `dist` and runs):
 
       ```bash
+      npm run clean
       npm run build
-      npm run start
+      npm run start-build
       ```
