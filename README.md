@@ -17,16 +17,21 @@ A microservice which handles user registration, authentication and account manag
 #### User Profile
 | Route | Description                                          
 |-------|-------------
-| <kbd>GET /v1/users/me</kbd> | Retrieve current user profile
+| <kbd>GET /v1/users/me</kbd> | Return current user profile
 | <kbd>PUT /v1/users/me</kbd> | Update current user profile
 | <kbd>DELETE /v1/users/me</kbd> | Delete current user profile
-| <kbd>GET /v1/users/by-username/:username</kbd> | Retrieve specific user profile
+| <kbd>GET /v1/users/by-username/:username</kbd> | Return specific user profile
 
 #### Documentation
 (Only available in development environment)
 | Route | Description                                          
 |-------|-------------
 | <kbd>GET /v1/docs</kbd> | Serves a web-page with API documentation
+
+#### Health
+| Route | Description                                          
+|-------|-------------
+| <kbd>GET /health</kbd> | Return server status
 
 ---
 

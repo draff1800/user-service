@@ -269,12 +269,12 @@ paths:
     get:
       security:
         - bearerAuth: []
-      summary: Retrieve current user profile
+      summary: Return current user profile
       tags:
         - User Profile
       responses:
         '200':
-          description: User profile retrieved
+          description: Returned User profile
           content:
             application/json:
               schema:
@@ -555,7 +555,7 @@ paths:
     get:
       security:
         - bearerAuth: []
-      summary: Retrieve specific user profile
+      summary: Return specific user profile
       tags:
         - User Profile
       parameters:
@@ -564,10 +564,10 @@ paths:
           required: true
           schema:
             type: string
-          description: Username of the user profile to retrieve
+          description: Username of the user profile to return
       responses:
         '200':
-          description: User profile retrieved
+          description: Returned User profile
           content:
             application/json:
               schema:
@@ -628,6 +628,14 @@ paths:
                   summary: Unexpected get error
                   value:
                     message: Couldn't get User - Unexpected error occurred
+  /health:
+    get:
+      summary: Return server status
+      tags:
+        - Health
+      responses:
+        '200':
+          description: Returned server status
 components:
   securitySchemes:
     bearerAuth:

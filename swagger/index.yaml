@@ -43,6 +43,10 @@ paths:
       security:
         - bearerAuth: []
 
+  /health:
+    get:
+      $ref: './paths/health/get/health.yaml'
+
 # ===
 
 components:

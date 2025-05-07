@@ -1,11 +1,11 @@
-summary: Retrieve current user profile
+summary: Return current user profile
 tags:
   - User Profile
 security:
   - bearerAuth: []
 responses:
   '200':
-    description: User profile retrieved
+    description: Returned User profile
     content:
       application/json:
         schema:

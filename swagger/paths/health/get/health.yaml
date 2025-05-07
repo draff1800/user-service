@@ -1,0 +1,6 @@
+summary: Return server status
+tags:
+  - Health
+responses:
+  '200':
+    description: Returned server status

@@ -1,0 +1,29 @@
+node_modules
+.gitignore
+
+# Environment Variables
+.env
+.env.*
+
+# Build Inputs
+eslintconfig.mjs
+.prettierrc
+
+# Build Outputs
+dist
+.tsbuildcache
+
+# Tools
+.husky
+.vscode
+.nvmrc
+
+# Docs
+LICENSE
+README.md
+
+# Docker
+Dockerfile
+Dockerfile.dev
+docker-compose.yml
+.dockerignore
