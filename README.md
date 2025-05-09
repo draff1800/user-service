@@ -37,16 +37,7 @@ A microservice which handles user registration, authentication and account manag
 
 ### Setup
 
-#### Local Development
-
-##### Prerequisites
-
-- Node.js (>= 18.x)
-- npm (>= 9.x)
-- [MongoDB Cloud Database Cluster](https://www.mongodb.com/products/platform/cloud)
-
-##### Steps
-
+#### Getting Started
 1. Clone the repository:
 
     ```bash
@@ -54,14 +45,10 @@ A microservice which handles user registration, authentication and account manag
     cd user-service
     ```
 
-2. Install dependencies:
-
-    ```bash
-    npm install
-    ```
+2. Set up a [MongoDB Cloud Database Cluster and Database](https://www.mongodb.com/products/platform/cloud)
+    - Note the connection URI (e.g. `mongodb+srv://<DB_USER>:<DB_PASSWORD>@<DB_CLUSTER_NAME>.fszttko.mongodb.net/<DB_DATABASE_NAME>?retryWrites=true&w=majority&appName=<DB_CLUSTER_NAME>`)
 
 3. Set up environment variables:
-
     - Create a `.env`:
 
       ```bash
@@ -78,18 +65,83 @@ A microservice which handles user registration, authentication and account manag
       - `DB_DATABASE_NAME`: MongoDB Database name
       - `JWT_SECRET`: The secret key used to sign JSON Web Tokens
 
-4. Start the service:
+#### Local Development
+1. Install the following prerequisites:
+    - Node.js (>= 18.x)
+    - npm (>= 9.x)
 
-    - Development mode (server restarts on code changes):
+2. Install dependencies:
+
+    ```bash
+    npm install
+    ```
+
+3. Start the service:
+    - Development mode (Service restarts on code changes):
 
       ```bash
       npm run start-dev
       ```
 
-    - Production mode (compiles to `dist` and runs):
+    - Build mode (Compiles to `dist` and runs):
 
       ```bash
       npm run clean
       npm run build
       npm run start-build
       ```
+
+#### Container-Based Development
+1. Install the following prerequisites:
+    - Docker (>= 20.x)
+    - Docker Compose (>= v2)
+
+2. Containerize the service:
+    - Docker Compose image (Relies on `.env`, restarts on code changes):
+
+      To start: 
+      ```bash
+      npm run start-local-container
+      ```
+
+      To clean up after stopping: 
+      ```bash
+      npm run clean-local-container
+      ```
+
+      Note: `PORT` in `.env` must match `ports` values in `docker-compose.yaml` - i.e. `3000` -> `3000:3000`
+
+    - Deployment-ready image (Relies on injected variables, static):
+
+      To build and run **dev**:
+      ```bash
+      docker build -f Dockerfile.dev -t user-service:dev .
+
+      docker run \
+        -e PORT=<PORT> \
+        -e DB_USER=<DB_USER> \
+        -e DB_PASSWORD=<DB_PASSWORD> \
+        -e DB_CLUSTER_NAME=<DB_CLUSTER_NAME> \
+        -e DB_DATABASE_NAME=<DB_DATABASE_NAME> \
+        -e JWT_SECRET=<JWT_SeCRET> \
+        -p <PORT:PORT> \
+        user-service:dev
+      ```
+
+      To build and run **prod**:
+      ```bash
+      docker build -f Dockerfile.prod -t user-service:prod .
+
+      docker run \
+        -e PORT=<PORT> \
+        -e DB_USER=<DB_USER> \
+        -e DB_PASSWORD=<DB_PASSWORD> \
+        -e DB_CLUSTER_NAME=<DB_CLUSTER_NAME> \
+        -e DB_DATABASE_NAME=<DB_DATABASE_NAME> \
+        -e JWT_SECRET=<JWT_SECRET> \
+        -p <PORT:PORT> \
+        user-service:prod
+      ```
+    
+
+

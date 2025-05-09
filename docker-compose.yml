@@ -1,10 +1,9 @@
-version: '3.8'
 services:
-  api:
+  user-service:
     build:
       context: .
       dockerfile: Dockerfile.local
-    image: user-service:dev-local
+    image: user-service:local
     ports:
       - "3000:3000"
     env_file:
@@ -12,4 +11,10 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-    command: npm run start-dev
+    develop:
+      watch:
+        - action: rebuild
+          path: ./src
+        - action: rebuild
+          path: ./swagger
+    command: node dist/server.js

@@ -3,28 +3,20 @@
   "type": "module",
   "version": "1.0.0",
   "main": "index.js",
-
   "scripts": {
     "ts-check": "tsc --noEmit",
     "clean": "rimraf dist .tsbuildcache",
     "build": "tsc -p tsconfig.build.json",
     "start-build": "node dist/server.js",
-
     "start-dev": "npm run bundle-swagger && tsx watch src/server.ts",
-
-    "start-dev-container": "docker compose up --build --force-recreate",
-    "remove-dev-container": "docker-compose down --rmi all",
-
+    "start-local-container": "docker compose up --build --force-recreate --watch",
+    "clean-local-container": "docker-compose down --rmi all",
     "bundle-swagger": "swagger-cli bundle swagger/index.yaml --outfile swagger/bundle.yaml --type yaml",
-
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
-
     "test": "echo \"Error: no test specified\" && exit 1",
-
     "prepare": "husky"
   },
-
   "author": "draff1800",
   "license": "MIT",
   "description": "A microservice which handles user registration, authentication and account management.",

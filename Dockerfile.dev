@@ -6,9 +6,11 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 
-# Copy and build app
+# Copy and build app (Including Swagger)
 COPY tsconfig.json tsconfig.build.json ./
 COPY src ./src
+COPY swagger ./swagger
+RUN npm run bundle-swagger
 RUN npm run build
 
 
@@ -21,20 +23,14 @@ LABEL org.opencontainers.image.title="User Service"
 LABEL org.opencontainers.image.description="A microservice which handles user registration, authentication and account management."
 LABEL org.opencontainers.image.version="1.0.0"
 
-# Accept NODE_ENV from build script argument (Default = development)
-ARG NODE_ENV=development
-ENV NODE_ENV=$NODE_ENV
+# Explictly set NODE_ENV to development
+ENV NODE_ENV=development
 
 # Copy build and dependencies
 COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/swagger ./swagger
 COPY package.json package-lock.json ./
-
-# Install dependencies (If NODE_ENV = production, strip Husky script & exclude dev dependencies)
-RUN if [ "$NODE_ENV" = "production" ]; then \
-        npm pkg set scripts.prepare="exit 0" && npm ci --omit=dev ; \
-    else \
-        npm ci ; \
-    fi
+RUN npm pkg set scripts.prepare="exit 0" && npm ci --omit=dev
 
 # Set up health-check script
 RUN apk add --no-cache curl
