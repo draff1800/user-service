@@ -99,7 +99,7 @@ A microservice which handles user registration, authentication and account manag
 2. Containerize the service:
     - Docker Compose image (Relies on `.env`, restarts on code changes):
 
-      To start: 
+      To build and start: 
       ```bash
       npm run start-local-container
       ```
