@@ -124,7 +124,7 @@ A microservice which handles user registration, authentication and account manag
         -e DB_CLUSTER_NAME=<DB_CLUSTER_NAME> \
         -e DB_DATABASE_NAME=<DB_DATABASE_NAME> \
         -e JWT_SECRET=<JWT_SeCRET> \
-        -p <PORT:PORT> \
+        -p <PORT>:<PORT> \
         user-service:dev
       ```
 
@@ -139,7 +139,7 @@ A microservice which handles user registration, authentication and account manag
         -e DB_CLUSTER_NAME=<DB_CLUSTER_NAME> \
         -e DB_DATABASE_NAME=<DB_DATABASE_NAME> \
         -e JWT_SECRET=<JWT_SECRET> \
-        -p <PORT:PORT> \
+        -p <PORT>:<PORT> \
         user-service:prod
       ```
     
