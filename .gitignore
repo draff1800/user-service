@@ -1,8 +1,10 @@
 # IDE Files
 .vscode/
 
-# Local Environment Configuration
+# Environment Variables
 .env
+k8s/dev/secret.yaml
+k8s/prod/secret.yaml
 
 # Node Modules
 node_modules/

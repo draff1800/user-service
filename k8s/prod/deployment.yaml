@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service-prod
+  labels:
+    app: user-service
+    env: prod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: user-service
+      env: prod
+  template:
+    metadata:
+      labels:
+        app: user-service
+        env: prod
+    spec:
+      containers:
+        - name: user-service
+          image: 728301184457.dkr.ecr.us-east-2.amazonaws.com/draff1800/sample-repository:prod
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: user-service-config-prod
+            - secretRef:
+                name: user-service-secret-prod
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 3
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
