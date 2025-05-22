@@ -28,7 +28,7 @@ jobs:
 
       - name: Update kubeconfig for EKS
         run: |
-          aws eks update-kubeconfig --region us-east-2 --name sample-cluster-2
+          aws eks update-kubeconfig --region us-east-2 --name sample-cluster
 
       - name: Deploy to dev namespace
         run: |
