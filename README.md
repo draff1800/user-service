@@ -5,9 +5,9 @@ A microservice which handles user registration, authentication and account manag
 
 ---
 
-### Endpoints
+### 🔌Endpoints
 #### Authentication
-| Route | Description                                          
+| Route | Description                                     
 |-------|-------------
 | <kbd>POST /v1/auth/register</kbd> | Register a new user
 | <kbd>POST /v1/auth/login</kbd> | Authenticate and return a JSON Web Token (JWT)
@@ -35,7 +35,7 @@ A microservice which handles user registration, authentication and account manag
 
 ---
 
-### Setup
+### 🛠️Setup
 
 #### Getting Started
 1. Clone the repository:
@@ -145,7 +145,7 @@ A microservice which handles user registration, authentication and account manag
 
 ---
 
-### Deployment
+### 🚀Deployment
 #### Prerequisites
 - An [AWS EKS](https://aws.amazon.com/eks/) cluster must exist and be accessible.
 - GitHub repository secrets must be configured:
@@ -178,4 +178,4 @@ A microservice which handles user registration, authentication and account manag
     - On GitHub, click `Releases`.
     - Click `Create a new release` / `Draft a new release`.
     - Enter a unique tag (e.g. `1.0.0`), title and description.
-    - Click `Publish release`. This will trigger the `Deploy (Prod)` workflow.
+    - Click `Publish release`. This triggers the `Deploy (Prod)` workflow.
