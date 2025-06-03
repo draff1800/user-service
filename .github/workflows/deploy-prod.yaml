@@ -1,4 +1,4 @@
-name: Deploy to EKS (Prod)
+name: Deploy (Prod)
 
 on:
   release:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy-prod:
-    name: Deploy to AWS EKS (Prod)
+    name: Deploy (Prod)
     runs-on: ubuntu-latest
 
     steps:

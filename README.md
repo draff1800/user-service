@@ -142,6 +142,40 @@ A microservice which handles user registration, authentication and account manag
         -p <PORT>:<PORT> \
         user-service:prod
       ```
-    
 
+---
 
+### Deployment
+#### Prerequisites
+- An [AWS EKS](https://aws.amazon.com/eks/) cluster must exist and be accessible.
+- GitHub repository secrets must be configured:
+  - `AWS_ACCESS_KEY_ID`: Public identifier for the cluster's IAM user.
+  - `AWS_SECRET_ACCESS_KEY`: Secret used to sign API requests.
+- `secret.yaml` files must be configured:
+    ```bash
+        cp k8s/dev/secret.example.yaml k8s/dev/secret.yaml
+        cp k8s/prod/secret.example.yaml k8s/prod/secret.yaml
+    ```
+    - Adjust their `stringData` values to be identical to those from `.env`.
+
+#### Environments
+- **dev**: Hosts latest in-development version.
+- **prod**: Hosts latest release version.
+
+#### Workflows
+- `.github/workflows/deploy-dev.yaml`: Deploys `dev` image to **dev** namespace on EKS. Triggered manually or when `development` branch is updated. Leverages `k8s/dev/`.
+- `.github/workflows/deploy-prod.yaml`: Deploys `prod` image to **prod** namespace on EKS. Triggered when a release is published. Leverages `k8s/prod/`.
+
+#### How to Deploy
+- **dev**:
+    - Push to 'development' branch, or...
+    - Trigger manually:
+        - On GitHub, click `Actions` Tab. 
+        - Click `Deploy (Dev)`.
+        - Click `Run workflow` with desired branch.
+
+- **prod**:
+    - On GitHub, click `Releases`.
+    - Click `Create a new release` / `Draft a new release`.
+    - Enter a unique tag (e.g. `1.0.0`), title and description.
+    - Click `Publish release`. This will trigger the `Deploy (Prod)` workflow.
