@@ -168,7 +168,7 @@ A microservice which handles user registration, authentication and account manag
 
 #### How to Deploy
 - **dev**:
-    - Push to 'development' branch, or...
+    - Push to `development` branch, or...
     - Trigger manually:
         - On GitHub, click `Actions` Tab. 
         - Click `Deploy (Dev)`.
