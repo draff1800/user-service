@@ -3,6 +3,8 @@
 
 A microservice which handles user registration, authentication and account management.
 
+This is an enterprise-grade codebase aligned with industry best practices, demonstrating proficiency in backend development.
+
 ---
 
 ### 🔌Endpoints
@@ -156,7 +158,7 @@ A microservice which handles user registration, authentication and account manag
         cp k8s/dev/secret.example.yaml k8s/dev/secret.yaml
         cp k8s/prod/secret.example.yaml k8s/prod/secret.yaml
     ```
-    - Adjust their `stringData` values to be identical to those from `.env`.
+    - Adjust their `stringData` values similarly to [how `.env` was configured](#getting-started).
 
 #### Environments
 - **dev**: Hosts latest in-development version.
