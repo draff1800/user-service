@@ -1,7 +1,7 @@
 # User Service
 ![Development Status](https://img.shields.io/badge/status-in%20development-yellow)
 
-A microservice which handles user registration, authentication and account management.
+An Express.js microservice which handles user registration, authentication and account management.
 
 This is an enterprise-grade codebase aligned with industry best practices, demonstrating proficiency in backend development.
 
@@ -181,3 +181,4 @@ This is an enterprise-grade codebase aligned with industry best practices, demon
     - Click `Create a new release` / `Draft a new release`.
     - Enter a unique tag (e.g. `1.0.0`), title and description.
     - Click `Publish release`. This triggers the `Deploy (Prod)` workflow.
+
