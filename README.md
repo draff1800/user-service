@@ -3,7 +3,7 @@
 
 An Express.js microservice which handles user registration, authentication and account management.
 
-This is an enterprise-grade codebase aligned with industry best practices, demonstrating proficiency in backend development.
+This is an enterprise-grade codebase aligned with industry best practices, demonstrating proficiency in backend engineering.
 
 ---
 
